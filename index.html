@@ -96,10 +96,25 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
             color: white;
             position: relative;
             overflow: hidden;
+        }
+
+        /* Mobile-specific background fix */
+        @media screen and (max-width: 768px) {
+            .title-page {
+                background-attachment: scroll;
+                min-height: 100vh;
+                min-height: 100svh; /* Support for newer browsers */
+            }
+        }
+
+        /* Desktop background */
+        @media screen and (min-width: 769px) {
+            .title-page {
+                background-attachment: fixed;
+            }
         }
 
         /* Background image overlay for better text readability */
