@@ -1,0 +1,3224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Mastering AI-Powered DevSecOps: Building Intelligent Security Automation for Modern Software Delivery | Brine Ketum</title>
+    <meta name="author" content="Brine Ketum">
+    <meta name="description" content="Master AI-Powered DevSecOps with intelligent security automation, ML-driven threat detection, automated vulnerability remediation, and secure AI/ML pipelines by Brine Ketum">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .ebook-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        /* ===== CONSISTENT TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            color: #1a1a2e;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 36px; line-height: 1.2; }
+        h2 { font-size: 32px; line-height: 1.3; }
+        h3 { font-size: 28px; line-height: 1.3; }
+        h4 { font-size: 24px; line-height: 1.4; }
+        h5 { font-size: 20px; line-height: 1.4; }
+        h6 { font-size: 18px; line-height: 1.4; }
+
+        p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        ul, ol {
+            font-size: 18px;
+            line-height: 1.7;
+            margin: 20px 0;
+            margin-left: 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* ===== CONSISTENT SPACING ===== */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .subsection {
+            margin-bottom: 30px;
+        }
+
+        /* ===== CONSISTENT LINKS ===== */
+        a {
+            color: #FF6B6B;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #DC143C;
+            text-decoration: underline;
+        }
+
+        /* ===== TITLE PAGE ===== */
+        .title-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            /* Background image will be set via JavaScript or inline style */
+            background: linear-gradient(135deg, #1a1a2e 0%, #8B0000 100%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background image overlay for better text readability */
+        .title-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(139, 0, 0, 0.85) 100%);
+            z-index: 1;
+        }
+
+        /* File upload styling for cover background */
+        .cover-upload-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .upload-section {
+            margin-bottom: 15px;
+        }
+
+        .upload-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .upload-section label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .file-input-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            color: white;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .file-input-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+        }
+
+        .upload-preview {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+            max-width: 200px;
+            word-wrap: break-word;
+        }
+
+        .reset-button {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .reset-button:hover {
+            background: #333;
+        }
+
+        .title-page > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-title {
+            font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .title-divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FF6B6B, transparent);
+            margin: 20px auto 30px;
+        }
+
+        .book-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            line-height: 1.5;
+            color: #f0f0f0;
+            max-width: 600px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .author-name {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .credentials-divider {
+            width: 50px;
+            height: 2px;
+            background: rgba(255, 107, 107, 0.8);
+            margin: 0 auto 15px;
+        }
+
+        .author-credentials {
+            font-size: 18px;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .publication-info {
+            font-size: 14px;
+            color: #d0d0d0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ===== CONSISTENT PAGE LAYOUTS ===== */
+        .standard-page {
+            padding: 60px;
+            min-height: 100vh;
+            background: white;
+        }
+
+        .chapter {
+            padding: 60px;
+            min-height: 100vh;
+            page-break-before: always;
+            background: white;
+        }
+
+        /* ===== CONSISTENT HEADERS ===== */
+        .page-header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #FF6B6B;
+            padding-bottom: 20px;
+        }
+
+        .chapter-header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #FF6B6B;
+            padding-bottom: 20px;
+        }
+
+        .chapter-number, .page-number {
+            font-size: 20px;
+            color: #FF6B6B;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title, .page-title {
+            font-size: 36px;
+            color: #1a1a2e;
+            margin: 0;
+        }
+
+        .chapter-intro, .page-intro {
+            font-size: 20px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 5px solid #FF6B6B;
+            border-radius: 5px;
+        }
+
+        /* ===== CONSISTENT SECTION TITLES ===== */
+        .section-title {
+            font-size: 28px;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .subsection-title {
+            font-size: 24px;
+            color: #0f3460;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        /* ===== CONSISTENT SHOWCASE BOXES ===== */
+        .content-showcase {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #FF6B6B;
+        }
+
+        .content-showcase h4 {
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .content-showcase p, .content-showcase li {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* ===== CONSISTENT TOOL GRIDS ===== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f1b3c 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
+        }
+
+        .tool-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .tool-card p {
+            font-size: 16px;
+            color: #e0e0e0;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* ===== CONSISTENT TABLES ===== */
+        table {
+            width: 100%;
+            font-size: 16px;
+            margin: 30px 0;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #f0f0f0;
+        }
+
+        /* ===== CONSISTENT SPECIAL SECTIONS ===== */
+        .highlight-section {
+            background: linear-gradient(135deg, #FF6B6B 0%, #DC143C 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            color: white;
+        }
+
+        .highlight-section h3, .highlight-section h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .highlight-section p, .highlight-section li {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 5px solid #2196f3;
+        }
+
+        .warning-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 5px solid #ff9800;
+        }
+
+        /* ===== CONSISTENT BUTTONS & LINKS ===== */
+        .cta-button {
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .resource-link {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(220, 53, 69, 0.8));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        /* ===== INTERACTIVE EXPANDABLE SECTIONS ===== */
+        .expandable-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .expandable-item {
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(220, 53, 69, 0.05));
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .expandable-item:hover {
+            border-color: #FF6B6B;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .expandable-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+            font-weight: 600;
+            font-size: 18px;
+            color: #1a1a2e;
+            transition: all 0.3s ease;
+        }
+
+        .expandable-header:hover {
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .expandable-header.active {
+            background: rgba(255, 107, 107, 0.15);
+            color: #DC143C;
+        }
+
+        .expandable-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .expandable-header.active .expandable-icon {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .expandable-content.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .expandable-content h5 {
+            color: #FF6B6B;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .expandable-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .expandable-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .expandable-content li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .expandable-resources {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .expandable-resource-link {
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .expandable-resource-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .click-instruction {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(220, 53, 69, 0.1));
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #FF6B6B;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        /* ===== TABLE OF CONTENTS ===== */
+        .toc-page {
+            padding: 60px;
+            min-height: 100vh;
+            background: #fafafa;
+        }
+
+        .toc-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #1a1a2e;
+            border-bottom: 3px solid #FF6B6B;
+            padding-bottom: 15px;
+        }
+
+        .toc-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .toc-item a {
+            color: #1a1a2e;
+            text-decoration: none;
+            flex-grow: 1;
+            padding-right: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .toc-item a:hover {
+            color: #FF6B6B;
+        }
+
+        .toc-dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted #ccc;
+            margin: 0 10px;
+        }
+
+        .toc-page-num {
+            color: #666;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* ===== RESOURCE TABS ===== */
+        .resource-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+            color: #1a1a2e;
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 107, 107, 0.5);
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .tab-button:not(.active):hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            transform: scale(1.02);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .resource-card h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .resource-card p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+        }
+
+        .resource-card a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ===== CERTIFICATION CARDS ===== */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .cert-card {
+            background: rgba(255,255,255,0.15);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cert-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .cert-card h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .cert-card p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .cert-card a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ===== AUTHOR BIO ===== */
+        .author-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            page-break-before: always;
+            background: linear-gradient(135deg, #1a1a2e 0%, #8B0000 100%);
+            color: white;
+        }
+
+        .author-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.8);
+            z-index: 1;
+        }
+
+        .author-page > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .author-page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .author-profile-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 30px;
+            border: 4px solid rgba(255, 107, 107, 0.6);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .author-profile-circle:hover {
+            transform: scale(1.05);
+            border-color: #FF6B6B;
+        }
+        
+        .author-profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .author-profile-circle:hover .profile-upload-overlay {
+            opacity: 1;
+        }
+
+        .profile-upload-overlay span {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Hide upload container on mobile */
+        @media screen and (max-width: 768px) {
+            .cover-upload-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px;
+                width: calc(100% - 40px);
+            }
+        }
+
+        .author-page-name {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .author-page-tagline {
+            font-size: 20px;
+            color: #FF6B6B;
+            margin-bottom: 40px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .author-bio-content {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .author-bio-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: justify;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .author-bio-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .author-connect {
+            margin-bottom: 40px;
+        }
+
+        .author-connect h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-links-large {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link-large {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 107, 107, 0.6);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-link-large:hover {
+            background: linear-gradient(135deg, #FF6B6B, #DC143C);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.5);
+            border-color: #FF6B6B;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .author-quote {
+            max-width: 700px;
+            margin: 40px auto 0;
+            background: rgba(255, 107, 107, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid #FF6B6B;
+        }
+
+        .author-quote p {
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0;
+        }
+
+        /* ===== FOOTER ===== */
+        .ebook-footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 40px 60px;
+            text-align: center;
+        }
+
+        .copyright {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .ebook-footer p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media screen and (max-width: 768px) {
+            .ebook-wrapper {
+                box-shadow: none;
+            }
+
+            .title-page, .chapter, .standard-page, .toc-page, .author-page {
+                padding: 30px 20px;
+            }
+
+            .book-title {
+                font-size: 32px;
+            }
+
+            .book-subtitle {
+                font-size: 18px;
+            }
+
+            .author-name {
+                font-size: 24px;
+            }
+
+            .chapter-title, .page-title, .toc-title {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .subsection-title {
+                font-size: 20px;
+            }
+
+            .chapter-intro, .page-intro {
+                font-size: 18px;
+            }
+
+            p, ul, ol {
+                font-size: 16px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .content-showcase {
+                padding: 20px;
+                margin: 20px -10px;
+            }
+
+            .highlight-section, .info-section, .warning-section {
+                padding: 30px 20px;
+                margin: 20px -20px;
+                border-radius: 0;
+            }
+
+            table {
+                font-size: 14px;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .resource-tabs {
+                gap: 10px;
+                margin-bottom: 25px;
+            }
+
+            .tab-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .social-links-large {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .social-link-large {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .author-page-title {
+                font-size: 32px;
+            }
+
+            .author-page-name {
+                font-size: 28px;
+            }
+
+            .author-bio-content {
+                padding: 25px;
+            }
+
+            .author-quote {
+                padding: 20px;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .resource-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            .ebook-wrapper {
+                box-shadow: none;
+            }
+            
+            .chapter, .standard-page {
+                page-break-before: always;
+                padding: 40px;
+            }
+            
+            a {
+                color: #FF6B6B !important;
+                text-decoration: underline !important;
+            }
+            
+            .highlight-section, .info-section, .warning-section {
+                background: #f0f0f0 !important;
+                color: #333 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ebook-wrapper">
+        <!-- Image Upload Controls -->
+        <div class="cover-upload-container">
+            <div class="upload-section">
+                <label for="cover-upload">Cover Background:</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="cover-upload" class="file-input" accept="image/*">
+                    <button class="file-input-button" onclick="document.getElementById('cover-upload').click()">
+                        Choose Image
+                    </button>
+                    <button class="reset-button" onclick="resetCoverImage()">Reset</button>
+                </div>
+                <div id="cover-preview" class="upload-preview"></div>
+            </div>
+            
+            <div class="upload-section">
+                <label for="profile-upload">Profile Picture:</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="profile-upload" class="file-input" accept="image/*">
+                    <button class="file-input-button" onclick="document.getElementById('profile-upload').click()">
+                        Choose Image
+                    </button>
+                    <button class="reset-button" onclick="resetProfileImage()">Reset</button>
+                </div>
+                <div id="profile-preview" class="upload-preview"></div>
+            </div>
+        </div>
+
+        <!-- Title Page -->
+        <div class="title-page">
+            <h1 class="book-title">
+                Mastering AI-Powered DevSecOps
+            </h1>
+            
+            <div class="title-divider"></div>
+            
+            <p class="book-subtitle">
+                Building Intelligent Security Automation<br>
+                for Modern Software Delivery
+            </p>
+            
+            <p class="author-name">Brine Ketum</p>
+            
+            <div class="credentials-divider"></div>
+            
+            <p class="author-credentials">AI Security Pioneer & Lead Sr. Cloud Engineer</p>
+            <p class="publication-info">First Edition • 2025</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc-page">
+            <div class="page-header">
+                <h2 class="toc-title">Table of Contents</h2>
+            </div>
+            <ol class="toc-list">
+                <li class="toc-item">
+                    <a href="#acknowledgments">Acknowledgments</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">v</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#foreword">Foreword by the Author</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">vii</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#introduction">Introduction: The AI Security Revolution</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">1</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter1">Chapter 1: AI-Powered DevSecOps Fundamentals</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">7</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter2">Chapter 2: Machine Learning for Security Detection</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">25</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter3">Chapter 3: AI-Driven Security Automation</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">43</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter4">Chapter 4: Securing AI/ML Pipelines</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">61</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter5">Chapter 5: Intelligent Threat Detection & Response</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">79</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter6">Chapter 6: AI-Enhanced Code Security Analysis</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">97</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter7">Chapter 7: Automated Vulnerability Remediation</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">115</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter8">Chapter 8: Cloud-Native AI Security Architecture</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">133</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter9">Chapter 9: Zero Trust & AI-Powered Access Control</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">151</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter10">Chapter 10: AI Security Operations (AIOps)</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">169</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter11">Chapter 11: Building AI-First Security Culture</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">187</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#chapter12">Chapter 12: Future of AI-Powered DevSecOps (2025-2030)</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">205</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#conclusion">Conclusion: Your AI-Powered Security Journey</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">223</span>
+                </li>
+                <li class="toc-item">
+                    <a href="#about">About the Author</a>
+                    <span class="toc-dots"></span>
+                    <span class="toc-page-num">235</span>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Acknowledgments -->
+        <div class="standard-page" id="acknowledgments">
+            <div class="page-header">
+                <div class="page-number">Acknowledgments</div>
+                <h2 class="page-title">Gratitude & Credits</h2>
+            </div>
+            
+            <div class="section">
+                <p>
+                    First and foremost, I dedicate this work to God Almighty for His endless grace, wisdom, and guidance that illuminated every step of this journey. Without His divine inspiration and strength, this book would not have been possible.
+                </p>
+                
+                <p>
+                    I would like to express my heartfelt appreciation to the incredible AI-powered DevSecOps community, the pioneers who recognized that artificial intelligence and machine learning could revolutionize how we approach security automation. Your innovations, open-source contributions, and shared knowledge have shaped the foundation of intelligent security operations.
+                </p>
+                
+                <p>
+                    I extend my gratitude to the organizations pushing the boundaries of AI in security — Microsoft with their AI-powered Security Copilot, Google for their Chronicle SOAR platform, GitHub for Copilot's security features, AWS for GuardDuty's ML capabilities, and countless others who have shared their AI security journey publicly.
+                </p>
+                
+                <p>
+                    Special thanks to the AI security research community, including OpenAI, Anthropic, DeepMind, and academic institutions advancing the field of adversarial machine learning and AI safety. The maintainers of AI security tools like Adversarial Robustness Toolbox, ModelScan, and AI security frameworks deserve our collective appreciation.
+                </p>
+                
+                <p>
+                    I'm grateful to the security teams I've had the privilege to work with, whose real-world challenges and innovative solutions have provided invaluable insights. Your dedication to protecting systems while enabling velocity is truly inspiring.
+                </p>
+                
+                <p>
+                    To my colleagues who champion security as a shared responsibility — your vision of embedded security practices has revolutionized how we think about application and infrastructure security.
+                </p>
+                
+                <p>
+                    To my family, loved ones, and all the readers embarking on their DevSecOps journey — this book is for you. May it serve as a comprehensive guide in building security into every aspect of your software delivery lifecycle.
+                </p>
+                
+                <div class="author-quote" style="background: rgba(255, 107, 107, 0.1); border-left: 5px solid #FF6B6B; padding: 30px; margin-top: 40px; border-radius: 10px;">
+                    <p style="font-style: italic; color: #FF6B6B; text-align: center; font-size: 20px; margin-bottom: 0;">
+                        "In the age of AI, security is not just about defending against threats, but intelligently predicting and preventing them before they materialize."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Foreword -->
+        <div class="standard-page" id="foreword">
+            <div class="page-header">
+                <div class="page-number">Foreword</div>
+                <h2 class="page-title">A Message from Brine Ketum</h2>
+            </div>
+            
+            <p class="page-intro">
+                Welcome to the world of AI-Powered DevSecOps—where artificial intelligence transforms security from reactive to predictive, and machine learning makes every security decision smarter.
+            </p>
+            
+            <div class="section">
+                <p>Dear Reader,</p>
+                
+                <p>
+                    AI-Powered DevSecOps represents a quantum leap in how we approach security in software development. It's not just about adding AI tools to your security stack—it's about fundamentally reimagining how intelligent systems can predict, prevent, and respond to security threats at machine speed.
+                </p>
+                
+                <p>
+                    When I first witnessed an AI system detect and automatically remediate a zero-day vulnerability before any human could respond, I realized we were entering a new era of security. The combination of DevSecOps practices with artificial intelligence creates a force multiplier that transforms security from a bottleneck into a competitive advantage.
+                </p>
+                
+                <p>
+                    Today, AI-Powered DevSecOps is becoming the standard. With cybercriminals using AI to launch sophisticated attacks, defenders must leverage equally advanced AI capabilities. Organizations using AI-enhanced security detect threats 200x faster and reduce false positives by 90%.
+                </p>
+                
+                <p>
+                    This book is your comprehensive guide to mastering AI-Powered DevSecOps. Whether you're implementing your first ML-based security tool or building an entire AI-driven security operations center, you'll find cutting-edge strategies, real-world implementations, and proven approaches that work.
+                </p>
+                
+                <p>
+                    The demand for AI security professionals is exploding. Organizations recognize that traditional security approaches can't keep pace with modern threats. This book will position you to lead this AI security transformation and build intelligent systems that stay ahead of attackers.
+                </p>
+                
+                <p>
+                    Remember, AI-Powered DevSecOps is about augmenting human intelligence with machine learning to create security that's proactive, adaptive, and intelligent.
+                </p>
+                
+                <p>Let's embark on this revolutionary journey together.</p>
+                
+                <p style="text-align: right; font-style: italic; margin-top: 40px;">
+                    — Brine Ketum<br>
+                    AI Security Pioneer
+                </p>
+            </div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="chapter" id="introduction">
+            <div class="chapter-header">
+                <div class="chapter-number">Introduction</div>
+                <h2 class="chapter-title">The AI Security Revolution</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                In an era where AI powers both attacks and defenses, AI-Powered DevSecOps has emerged as the critical practice that enables organizations to stay ahead of intelligent threats. <strong>By 2025, 85% of security operations will use AI/ML for threat detection, up from 25% in 2023.</strong>
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">🚨 The AI Security Challenge</h3>
+                <div class="warning-section">
+                    <h4>Critical AI Security Statistics (2025)</h4>
+                    <ul>
+                        <li><strong>76%</strong> of cyberattacks now use AI/ML techniques (Darktrace)</li>
+                        <li><strong>$15.4 trillion</strong> - Economic impact of AI by 2030, with security as top concern (PwC)</li>
+                        <li><strong>200x</strong> faster threat detection with AI-powered security tools (IBM)</li>
+                        <li><strong>92%</strong> reduction in false positives using ML-based detection (Microsoft)</li>
+                        <li><strong>3 minutes</strong> - Average time for AI to detect and respond to threats (vs 280 days manually)</li>
+                        <li><strong>40%</strong> of organizations suffered AI model poisoning attacks in 2024 (Gartner)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Why AI-Powered DevSecOps Matters Now</h3>
+                <p>
+                    Traditional security tools can't keep pace with AI-powered attacks. With attackers using machine learning to find vulnerabilities, evade detection, and automate exploits, defenders need equally sophisticated AI capabilities. <strong>According to McKinsey, organizations using AI in security see 90% faster incident response and 60% cost reduction.</strong>
+                </p>
+                
+                <div class="content-showcase">
+                    <h4>The AI-Powered DevSecOps Advantage</h4>
+                    <ul>
+                        <li><strong><a href="https://www.microsoft.com/security/blog/2023/03/28/microsoft-security-copilot/">Predictive Security:</a></strong> AI predicts vulnerabilities before they're exploited</li>
+                        <li><strong><a href="https://cloud.google.com/chronicle/docs/soar/soar-overview">Intelligent Automation:</a></strong> ML-driven security orchestration and response</li>
+                        <li><strong><a href="https://github.blog/2023-11-08-ai-powered-appsec/">Code Security Analysis:</a></strong> AI reviews code for complex vulnerabilities</li>
+                        <li><strong><a href="https://www.darktrace.com/en/cyber-ai/">Behavioral Analytics:</a></strong> ML detects anomalies humans miss</li>
+                        <li><strong><a href="https://aws.amazon.com/guardduty/">Adaptive Defense:</a></strong> Security that learns and evolves with threats</li>
+                        <li><strong><a href="https://www.ibm.com/security/artificial-intelligence">Natural Language Security:</a></strong> Query security data using plain English</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">💡 What Makes This Book Different</h3>
+                <div class="info-section">
+                    <ul>
+                        <li><strong>AI Implementation Guides:</strong> Step-by-step ML security deployments</li>
+                        <li><strong>Secure AI Pipelines:</strong> Protect your AI/ML models from attacks</li>
+                        <li><strong>Intelligent Automation:</strong> Build self-healing security systems</li>
+                        <li><strong>Advanced Threat Detection:</strong> Implement behavioral analytics and anomaly detection</li>
+                        <li><strong>AI Security Tools:</strong> Master the latest AI-powered security platforms</li>
+                        <li><strong>Future-Ready Skills:</strong> Prepare for quantum computing and advanced AI threats</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">The Current AI Security Landscape</h3>
+                <p>
+                    According to the 2025 State of AI Security Report, organizations with mature AI-powered security operations detect threats 200x faster while reducing security team workload by 70%. <strong>AI Security Engineers command average salaries of $195K-$280K, reflecting the critical nature of their work.</strong>
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">What You'll Master</h3>
+                <p>
+                    This book provides a complete roadmap to becoming an AI-Powered DevSecOps expert. You'll learn to implement machine learning for threat detection, build intelligent security automation, secure AI/ML pipelines, and create adaptive defense systems. <strong>By the end, you'll have the most sought-after skills in cybersecurity.</strong>
+                </p>
+                
+                <div class="highlight-section">
+                    <h4 style="text-align: center; margin-bottom: 30px;">🎯 Your Success Metrics After This Book</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+                        <div>
+                            <div style="font-size: 36px; font-weight: bold; margin-bottom: 10px;">99.9%</div>
+                            <div>Threat Detection Rate</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; font-weight: bold; margin-bottom: 10px;">200x</div>
+                            <div>Faster Response Time</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; font-weight: bold; margin-bottom: 10px;">90%</div>
+                            <div>Fewer False Positives</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; font-weight: bold; margin-bottom: 10px;">70%</div>
+                            <div>Automation Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 1: AI-Powered DevSecOps Fundamentals -->
+        <div class="chapter" id="chapter1">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 1</div>
+                <h2 class="chapter-title">AI-Powered DevSecOps Fundamentals</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                AI-Powered DevSecOps combines the principles of DevSecOps with artificial intelligence and machine learning to create intelligent, adaptive security systems. Let's explore the foundations of this revolutionary approach.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">What is AI-Powered DevSecOps?</h3>
+                <p>
+                    AI-Powered DevSecOps enhances traditional DevSecOps by integrating machine learning algorithms, natural language processing, and intelligent automation throughout the security lifecycle. It transforms security from reactive rule-based systems to proactive, learning systems that adapt to new threats automatically.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Core Components of AI-Powered DevSecOps</h3>
+                
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🤖 Machine Learning in Security</h4>
+                    <ul>
+                        <li><strong>Anomaly Detection:</strong> ML models identify unusual patterns
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.elastic.co/guide/en/machine-learning/current/ml-overview.html" class="resource-link">Elastic ML Guide</a>
+                                <a href="https://www.youtube.com/watch?v=lTSGjC6ErU8" class="resource-link">ML Anomaly Detection</a>
+                                <a href="https://github.com/aws-samples/amazon-sagemaker-anomaly-detection" class="resource-link">SageMaker Examples</a>
+                            </div>
+                        </li>
+                        <li><strong>Predictive Analytics:</strong> Forecast security incidents before they occur
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://cloud.google.com/security-command-center/docs/concepts-vulnerabilities-findings" class="resource-link">Predictive Security</a>
+                                <a href="https://www.youtube.com/watch?v=tgO5nHTUqv8" class="resource-link">AI Threat Prediction</a>
+                                <a href="https://github.com/cylance/CylancePROTECT" class="resource-link">AI-Driven Protection</a>
+                            </div>
+                        </li>
+                        <li><strong>Behavioral Analysis:</strong> Learn normal behavior to detect threats
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.darktrace.com/en/technology/" class="resource-link">Darktrace AI</a>
+                                <a href="https://www.youtube.com/watch?v=FsXgXPB3w4s" class="resource-link">UEBA Explained</a>
+                                <a href="https://github.com/splunk/security_content" class="resource-link">Splunk Security</a>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="subsection-title">🧠 Natural Language Processing</h4>
+                    <ul>
+                        <li><strong>Security Copilots:</strong> AI assistants for security operations
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.microsoft.com/security/blog/2023/03/28/microsoft-security-copilot/" class="resource-link">Security Copilot</a>
+                                <a href="https://www.youtube.com/watch?v=dQJ7XuAVLOc" class="resource-link">AI Security Assistant</a>
+                                <a href="https://github.com/openai/chatgpt-retrieval-plugin" class="resource-link">AI Integration</a>
+                            </div>
+                        </li>
+                        <li><strong>Threat Intelligence:</strong> Process unstructured threat data
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.ibm.com/security/data-security/threat-intelligence" class="resource-link">IBM Threat Intel</a>
+                                <a href="https://www.youtube.com/watch?v=4c5AVmPFZkg" class="resource-link">NLP for Security</a>
+                                <a href="https://github.com/mitre/cti" class="resource-link">MITRE CTI</a>
+                            </div>
+                        </li>
+                        <li><strong>Automated Documentation:</strong> Generate security reports with AI
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://openai.com/blog/introducing-chatgpt-enterprise" class="resource-link">ChatGPT Enterprise</a>
+                                <a href="https://www.youtube.com/watch?v=X0bA-5ATCJI" class="resource-link">AI Documentation</a>
+                                <a href="https://github.com/langchain-ai/langchain" class="resource-link">LangChain</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI vs Traditional Security Approaches</h3>
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Traditional Security</th>
+                        <th>AI-Powered Security</th>
+                    </tr>
+                    <tr>
+                        <td>Detection Method</td>
+                        <td>Rule-based signatures</td>
+                        <td>Behavioral patterns & anomalies</td>
+                    </tr>
+                    <tr>
+                        <td>Response Time</td>
+                        <td>Hours to days</td>
+                        <td>Milliseconds to seconds</td>
+                    </tr>
+                    <tr>
+                        <td>Adaptability</td>
+                        <td>Manual updates required</td>
+                        <td>Self-learning and evolving</td>
+                    </tr>
+                    <tr>
+                        <td>False Positive Rate</td>
+                        <td>High (30-40%)</td>
+                        <td>Low (2-5%)</td>
+                    </tr>
+                    <tr>
+                        <td>Scale</td>
+                        <td>Limited by human capacity</td>
+                        <td>Unlimited scalability</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">The AI Security Ecosystem</h3>
+                <p>
+                    Modern AI-powered security leverages a rich ecosystem of machine learning frameworks, security platforms, and intelligent tools. According to Gartner, by 2027, 80% of security operations will be augmented by AI, fundamentally changing how we protect systems and data.
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 2: Machine Learning for Security Detection -->
+        <div class="chapter" id="chapter2">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 2</div>
+                <h2 class="chapter-title">Machine Learning for Security Detection</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                Machine learning transforms security detection from reactive pattern matching to proactive threat hunting. Learn how to implement ML models that detect threats faster and more accurately than traditional methods.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The Power of ML in Security</h3>
+                <p>
+                    Traditional signature-based detection fails against zero-day attacks and polymorphic malware. Machine learning models can identify malicious behavior by learning patterns from millions of data points. According to Capgemini, 69% of organizations believe AI/ML is necessary to respond to cyberattacks.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">ML Detection Techniques</h3>
+                <div class="content-showcase">
+                    <p style="text-align: center; font-weight: 600; color: #FF6B6B; margin-bottom: 20px;">
+                        💡 Click on any ML technique to explore implementation guides and tools!
+                    </p>
+                    <div class="tools-grid">
+                        <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" class="tool-card">
+                            <h4>Anomaly Detection</h4>
+                            <p>Identify unusual patterns using unsupervised learning</p>
+                        </a>
+                        <a href="https://www.tensorflow.org/tutorials/structured_data/imbalanced_data" class="tool-card">
+                            <h4>Malware Classification</h4>
+                            <p>Deep learning for malware family identification</p>
+                        </a>
+                        <a href="https://github.com/splunk/security_content" class="tool-card">
+                            <h4>User Behavior Analytics</h4>
+                            <p>UEBA for insider threat detection</p>
+                        </a>
+                        <a href="https://pytorch.org/tutorials/beginner/nlp/sequence_models_tutorial.html" class="tool-card">
+                            <h4>Network Traffic Analysis</h4>
+                            <p>RNN/LSTM for packet sequence analysis</p>
+                        </a>
+                        <a href="https://github.com/endgameinc/gym-malware" class="tool-card">
+                            <h4>Adversarial ML Defense</h4>
+                            <p>Protect ML models from poisoning attacks</p>
+                        </a>
+                        <a href="https://github.com/aws/sagemaker-python-sdk" class="tool-card">
+                            <h4>Fraud Detection</h4>
+                            <p>Real-time fraud scoring with ML</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Implementing ML Security Models</h3>
+                <ol>
+                    <li><strong>Data Collection:</strong> Gather security logs, network traffic, and threat intelligence</li>
+                    <li><strong>Feature Engineering:</strong> Extract meaningful features from raw security data</li>
+                    <li><strong>Model Selection:</strong> Choose appropriate algorithms for your use case</li>
+                    <li><strong>Training Pipeline:</strong> Build scalable ML training infrastructure</li>
+                    <li><strong>Model Validation:</strong> Test against real-world attack scenarios</li>
+                    <li><strong>Continuous Learning:</strong> Update models with new threat data</li>
+                </ol>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Case Study: Google's Chronicle</h3>
+                <p>
+                    Google's Chronicle uses machine learning to analyze petabytes of security data in real-time. Their models detect threats 10x faster than traditional SIEM systems while reducing false positives by 85%. The platform demonstrates the power of combining big data with advanced ML algorithms.
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 3: AI-Driven Security Automation -->
+        <div class="chapter" id="chapter3">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 3</div>
+                <h2 class="chapter-title">AI-Driven Security Automation</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                AI-driven automation transforms security operations from manual, reactive processes to intelligent, self-healing systems. Discover how to build security automation that learns, adapts, and responds at machine speed.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The AI Automation Revolution</h3>
+                <p>
+                    Modern security teams are overwhelmed by alerts—the average SOC receives 11,000 alerts per day. AI-driven automation can triage, investigate, and remediate threats automatically. According to IBM, organizations using AI automation reduce incident response time from 280 days to 3 minutes.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI Security Automation Tools</h3>
+                <div class="content-showcase">
+                    <p style="text-align: center; font-weight: 600; color: #FF6B6B; margin-bottom: 20px;">
+                        💡 Click on any tool category below to explore AI-powered security solutions!
+                    </p>
+                    <div class="tools-grid">
+                        <a href="https://www.paloaltonetworks.com/cortex/xsoar" class="tool-card">
+                            <h4>AI-Powered SOAR</h4>
+                            <p>Intelligent security orchestration and response</p>
+                        </a>
+                        <a href="https://github.com/demisto/content" class="tool-card">
+                            <h4>Playbook Automation</h4>
+                            <p>ML-optimized incident response playbooks</p>
+                        </a>
+                        <a href="https://www.microsoft.com/security/business/ai-machine-learning" class="tool-card">
+                            <h4>Threat Intelligence AI</h4>
+                            <p>Automated threat hunting with NLP</p>
+                        </a>
+                        <a href="https://www.crowdstrike.com/platform/threat-graph/" class="tool-card">
+                            <h4>Graph Analytics</h4>
+                            <p>AI-powered attack path analysis</p>
+                        </a>
+                        <a href="https://www.elastic.co/security/siem" class="tool-card">
+                            <h4>Automated Remediation</h4>
+                            <p>Self-healing security with ML</p>
+                        </a>
+                        <a href="https://www.sentinelone.com/platform/singularity-xdr/" class="tool-card">
+                            <h4>Autonomous XDR</h4>
+                            <p>AI-driven extended detection and response</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Building Intelligent Security Automation</h3>
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🤖 AI Automation Components</h4>
+                    <ul>
+                        <li><strong>Intelligent Alert Triage:</strong> ML models prioritize real threats
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.splunk.com/en_us/blog/security/alert-fatigue-real-solutions.html" class="resource-link">Alert Prioritization</a>
+                                <a href="https://www.youtube.com/watch?v=Fwvv6GnF5Qc" class="resource-link">ML Alert Triage</a>
+                                <a href="https://github.com/splunk/security-ml-toolkit" class="resource-link">Splunk ML Toolkit</a>
+                            </div>
+                        </li>
+                        <li><strong>Automated Investigation:</strong> AI gathers context and evidence
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://docs.microsoft.com/en-us/microsoft-365/security/defender/automated-investigation-response" class="resource-link">Automated Investigation</a>
+                                <a href="https://www.youtube.com/watch?v=tPLQR1aIpfM" class="resource-link">AI Investigation</a>
+                                <a href="https://github.com/TheHive-Project/TheHive" class="resource-link">TheHive Platform</a>
+                            </div>
+                        </li>
+                        <li><strong>Smart Response Actions:</strong> Context-aware remediation
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.paloaltonetworks.com/blog/2023/09/cortex-xsoar-automation/" class="resource-link">Smart Response</a>
+                                <a href="https://www.youtube.com/watch?v=R6hCJtyRbJY" class="resource-link">Automated Response</a>
+                                <a href="https://github.com/guardicore/monkey" class="resource-link">Infection Monkey</a>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="subsection-title">📊 AI Automation Metrics</h4>
+                    <ul>
+                        <li><strong>MTTD Reduction:</strong> 99% faster threat detection</li>
+                        <li><strong>Alert Accuracy:</strong> 95% reduction in false positives</li>
+                        <li><strong>Automation Rate:</strong> 80% of incidents auto-resolved</li>
+                        <li><strong>Cost Savings:</strong> 70% reduction in SOC workload</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI Automation Best Practices</h3>
+                <ol>
+                    <li><strong><a href="https://www.gartner.com/en/documents/3994096">Human-in-the-Loop:</a></strong> Maintain oversight for critical actions</li>
+                    <li><strong><a href="https://arxiv.org/abs/2103.00245">Explainable AI:</a></strong> Understand automation decisions</li>
+                    <li><strong><a href="https://www.nist.gov/ai/ai-risk-management-framework">Continuous Learning:</a></strong> Update models with feedback</li>
+                    <li><strong><a href="https://owasp.org/www-project-ai-security-verification-standard/">AI Safety:</a></strong> Protect automation from attacks</li>
+                    <li><strong><a href="https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning">MLOps Integration:</a></strong> Version control for AI models</li>
+                    <li><strong><a href="https://www.iso.org/standard/77609.html">Compliance:</a></strong> Ensure AI decisions are auditable</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 4: Securing AI/ML Pipelines -->
+        <div class="chapter" id="chapter4">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 4</div>
+                <h2 class="chapter-title">Securing AI/ML Pipelines</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                As AI/ML becomes critical infrastructure, securing machine learning pipelines is paramount. Master the art of protecting AI models from poisoning, theft, and adversarial attacks while ensuring secure MLOps practices.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The AI Security Challenge</h3>
+                <p>
+                    AI systems face unique security threats—from data poisoning to model extraction attacks. According to Gartner, by 2025, 30% of cyberattacks will involve AI model manipulation. With AI driving critical decisions, securing ML pipelines is no longer optional—it's essential.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">🚀 AI/ML Security Stack</h3>
+                <div class="highlight-section">
+                    <p style="margin-bottom: 30px;">Comprehensive security for AI/ML systems</p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                        <p style="text-align: center; font-weight: 600; margin-bottom: 0;">
+                            💡 Click on the tabs below to explore different AI security layers!
+                        </p>
+                    </div>
+                    
+                    <div class="resource-tabs">
+                        <button class="tab-button active" onclick="showTab('data-security')">📊 Data Security</button>
+                        <button class="tab-button" onclick="showTab('model-security')">🧠 Model Security</button>
+                        <button class="tab-button" onclick="showTab('pipeline-security')">🔧 Pipeline Security</button>
+                        <button class="tab-button" onclick="showTab('runtime-ai-security')">🏃 Runtime Security</button>
+                    </div>
+
+                    <!-- Data Security Tab -->
+                    <div id="data-security" class="tab-content active">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>Data Poisoning Defense</h4>
+                                <p>Protect training data from malicious inputs</p>
+                                <a href="https://arxiv.org/abs/1811.00741">Research Paper →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Privacy-Preserving ML</h4>
+                                <p>Federated learning and differential privacy</p>
+                                <a href="https://www.tensorflow.org/federated">TFF Framework →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Secure Data Pipelines</h4>
+                                <p>Encrypted data processing for ML</p>
+                                <a href="https://github.com/OpenMined/PySyft">PySyft →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Security Tab -->
+                    <div id="model-security" class="tab-content">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>Adversarial Robustness</h4>
+                                <p>Defend against adversarial examples</p>
+                                <a href="https://github.com/Trusted-AI/adversarial-robustness-toolbox">IBM ART →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Model Watermarking</h4>
+                                <p>Protect intellectual property</p>
+                                <a href="https://github.com/facebookresearch/DeepPrivacy">Model Protection →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Model Encryption</h4>
+                                <p>Homomorphic encryption for ML</p>
+                                <a href="https://github.com/microsoft/SEAL">Microsoft SEAL →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pipeline Security Tab -->
+                    <div id="pipeline-security" class="tab-content">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>MLOps Security</h4>
+                                <p>Secure ML model deployment pipelines</p>
+                                <a href="https://mlflow.org/docs/latest/tracking.html">MLflow Security →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Model Versioning</h4>
+                                <p>Secure model registry and versioning</p>
+                                <a href="https://www.kubeflow.org/docs/components/model-registry/">Kubeflow Registry →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Supply Chain Security</h4>
+                                <p>Verify model lineage and dependencies</p>
+                                <a href="https://github.com/sigstore/cosign">Model Signing →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Runtime Security Tab -->
+                    <div id="runtime-ai-security" class="tab-content">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>Model Monitoring</h4>
+                                <p>Detect model drift and attacks</p>
+                                <a href="https://www.seldon.io/solutions/open-source-projects/alibi-detect">Alibi Detect →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Inference Security</h4>
+                                <p>Secure model serving infrastructure</p>
+                                <a href="https://www.tensorflow.org/tfx/serving/serving_config">TF Serving Security →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>API Rate Limiting</h4>
+                                <p>Prevent model extraction attacks</p>
+                                <a href="https://github.com/Netflix/repokid">Access Control →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI Security Best Practices</h3>
+                <ol>
+                    <li><strong><a href="https://www.nist.gov/news-events/news/2023/01/nist-risk-management-framework-aims-improve-trustworthiness-artificial">AI Risk Assessment:</a></strong> Identify ML-specific threats</li>
+                    <li><strong><a href="https://arxiv.org/abs/1610.05820">Differential Privacy:</a></strong> Protect training data privacy</li>
+                    <li><strong><a href="https://github.com/cleverhans-lab/cleverhans">Adversarial Training:</a></strong> Build robust models</li>
+                    <li><strong><a href="https://github.com/tensorflow/model-card-toolkit">Model Cards:</a></strong> Document model limitations</li>
+                    <li><strong><a href="https://www.mlsecurity.ai/post/what-is-ml-model-scanning">Model Scanning:</a></strong> Detect backdoors and biases</li>
+                    <li><strong><a href="https://pytorch.org/serve/security.html">Secure Deployment:</a></strong> Hardened inference endpoints</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 5: Intelligent Threat Detection & Response -->
+        <div class="chapter" id="chapter5">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 5</div>
+                <h2 class="chapter-title">Intelligent Threat Detection & Response</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                Modern threats require intelligent detection systems that can learn, adapt, and respond faster than human operators. Learn how to build AI-powered threat detection that stays ahead of sophisticated attackers.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The Evolution of Threat Detection</h3>
+                <p>
+                    Traditional signature-based detection is insufficient against modern threats. AI-powered systems can identify subtle patterns, predict attack vectors, and respond autonomously. According to Ponemon Institute, AI reduces threat detection time from 280 days to under 1 hour.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI Threat Detection Technologies</h3>
+                <div class="content-showcase">
+                    <div class="tools-grid">
+                        <a href="https://www.darktrace.com/en/technology/" class="tool-card">
+                            <h4>Behavioral AI</h4>
+                            <p>Self-learning cyber AI that understands normal behavior</p>
+                        </a>
+                        <a href="https://www.crowdstrike.com/platform/threat-intelligence/" class="tool-card">
+                            <h4>Threat Graph Analytics</h4>
+                            <p>AI-powered attack path visualization and analysis</p>
+                        </a>
+                        <a href="https://www.microsoft.com/security/business/siem-and-xdr/microsoft-sentinel" class="tool-card">
+                            <h4>Cloud-Native SIEM</h4>
+                            <p>AI-enhanced security information and event management</p>
+                        </a>
+                        <a href="https://www.elastic.co/security/endpoint-security" class="tool-card">
+                            <h4>Endpoint Detection AI</h4>
+                            <p>Machine learning for endpoint threat detection</p>
+                        </a>
+                        <a href="https://www.splunk.com/en_us/products/user-behavior-analytics.html" class="tool-card">
+                            <h4>User Behavior Analytics</h4>
+                            <p>ML-powered insider threat detection</p>
+                        </a>
+                        <a href="https://www.paloaltonetworks.com/network-security/wildfire" class="tool-card">
+                            <h4>AI Malware Analysis</h4>
+                            <p>Automated malware detection and analysis</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Building Intelligent Detection Systems</h3>
+                <ol>
+                    <li><strong><a href="https://www.mitre.org/attackcon/talks/threat-hunting-with-artificial-intelligence">Data Collection Strategy:</a></strong> Comprehensive telemetry gathering</li>
+                    <li><strong><a href="https://www.sans.org/white-papers/39610/">Feature Engineering:</a></strong> Extract meaningful security indicators</li>
+                    <li><strong><a href="https://arxiv.org/abs/2103.15327">Model Training:</a></strong> Supervised and unsupervised learning</li>
+                    <li><strong><a href="https://www.nist.gov/publications/ai-risk-management-framework-ai-rmf-10">Validation Testing:</a></strong> Adversarial robustness testing</li>
+                    <li><strong><a href="https://www.cisa.gov/sites/default/files/publications/21_0901_cisa_threat-hunting-considerations.pdf">Deployment Strategy:</a></strong> Gradual rollout with human oversight</li>
+                    <li><strong><a href="https://www.elastic.co/guide/en/security/current/detections-ui-exceptions.html">Continuous Improvement:</a></strong> Feedback loops and model updates</li>
+                </ol>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Case Study: CrowdStrike Falcon</h3>
+                <p>
+                    CrowdStrike's AI-powered platform processes over 7 trillion events weekly, detecting threats with 99.98% accuracy. Their behavioral AI identifies never-before-seen attacks by understanding normal system behavior and flagging deviations that indicate compromise.
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 6: AI-Enhanced Code Security Analysis -->
+        <div class="chapter" id="chapter6">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 6</div>
+                <h2 class="chapter-title">AI-Enhanced Code Security Analysis</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                AI transforms code security analysis from static rule-based scanning to intelligent vulnerability detection that understands context, intent, and complex security patterns in code.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The AI Code Analysis Revolution</h3>
+                <p>
+                    Traditional static analysis tools generate thousands of false positives and miss complex vulnerabilities. AI-enhanced analysis understands code semantics, identifies business logic flaws, and provides contextual security insights. GitHub's research shows AI reduces false positives by 75% while finding 40% more real vulnerabilities.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI-Powered Code Security Tools</h3>
+                <div class="content-showcase">
+                    <div class="tools-grid">
+                        <a href="https://github.com/features/copilot" class="tool-card">
+                            <h4>GitHub Copilot Security</h4>
+                            <p>AI pair programming with security awareness</p>
+                        </a>
+                        <a href="https://www.sonarsource.com/products/sonarcloud/" class="tool-card">
+                            <h4>SonarCloud AI</h4>
+                            <p>Machine learning for code quality and security</p>
+                        </a>
+                        <a href="https://www.veracode.com/products/binary-static-analysis-sast" class="tool-card">
+                            <h4>Veracode AI-SAST</h4>
+                            <p>AI-enhanced static application security testing</p>
+                        </a>
+                        <a href="https://snyk.io/product/snyk-code/" class="tool-card">
+                            <h4>Snyk Code AI</h4>
+                            <p>Real-time vulnerability detection with ML</p>
+                        </a>
+                        <a href="https://www.checkmarx.com/product/cxsast/" class="tool-card">
+                            <h4>Checkmarx AI</h4>
+                            <p>Intelligent static analysis with context awareness</p>
+                        </a>
+                        <a href="https://www.whitesourcesoftware.com/" class="tool-card">
+                            <h4>WhiteSource AI</h4>
+                            <p>AI-powered open source vulnerability detection</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI Code Analysis Capabilities</h3>
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🧠 Advanced AI Features</h4>
+                    <ul>
+                        <li><strong>Semantic Understanding:</strong> AI comprehends code meaning and intent</li>
+                        <li><strong>Context-Aware Analysis:</strong> Considers application architecture and data flow</li>
+                        <li><strong>Business Logic Flaws:</strong> Identifies complex authorization and authentication issues</li>
+                        <li><strong>Zero-Day Detection:</strong> Finds novel vulnerability patterns</li>
+                        <li><strong>Automated Remediation:</strong> Suggests and implements security fixes</li>
+                        <li><strong>Risk Prioritization:</strong> ML-based vulnerability scoring</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Implementing AI Code Security</h3>
+                
+                <div class="click-instruction">
+                    💡 Click on any implementation step below to see detailed guides, tools, and resources!
+                </div>
+                
+                <ol class="expandable-list">
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>Continuous Scanning: Integrate AI analysis in CI/CD</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>🔄 Continuous AI-Powered Code Analysis</h5>
+                            <p>Implement real-time AI security scanning throughout your development pipeline to catch vulnerabilities as they're introduced.</p>
+                            <ul>
+                                <li><strong>Pre-commit Hooks:</strong> AI scans before code commits</li>
+                                <li><strong>Pull Request Analysis:</strong> Automated security reviews</li>
+                                <li><strong>Build Pipeline Integration:</strong> Security gates in CI/CD</li>
+                                <li><strong>Real-time Feedback:</strong> Instant developer notifications</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://docs.github.com/en/code-security/code-scanning" class="expandable-resource-link">GitHub Code Scanning</a>
+                                <a href="https://www.sonarqube.org/features/security/" class="expandable-resource-link">SonarQube Security</a>
+                                <a href="https://snyk.io/product/snyk-code/" class="expandable-resource-link">Snyk Code</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>ML Model Training: Train on your codebase patterns</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>🧠 Custom AI Security Models</h5>
+                            <p>Train machine learning models on your specific codebase to identify organization-specific security patterns and vulnerabilities.</p>
+                            <ul>
+                                <li><strong>Data Collection:</strong> Gather historical security findings</li>
+                                <li><strong>Feature Engineering:</strong> Extract code patterns and metrics</li>
+                                <li><strong>Model Selection:</strong> Choose appropriate ML algorithms</li>
+                                <li><strong>Training Pipeline:</strong> Automated model updates</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://www.tensorflow.org/guide" class="expandable-resource-link">TensorFlow Guide</a>
+                                <a href="https://scikit-learn.org/stable/" class="expandable-resource-link">Scikit-learn</a>
+                                <a href="https://github.com/microsoft/CodeBERT" class="expandable-resource-link">CodeBERT</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>Security Hotspots: Focus on high-risk code areas</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>🎯 AI-Driven Risk Prioritization</h5>
+                            <p>Use AI to identify and prioritize the most critical security vulnerabilities based on business impact and exploitability.</p>
+                            <ul>
+                                <li><strong>Risk Scoring:</strong> AI-powered CVSS enhancement</li>
+                                <li><strong>Context Analysis:</strong> Business logic understanding</li>
+                                <li><strong>Attack Path Mapping:</strong> Vulnerability chaining analysis</li>
+                                <li><strong>Priority Queues:</strong> Developer-friendly task management</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://www.sonarqube.org/features/security-hotspots/" class="expandable-resource-link">SonarQube Hotspots</a>
+                                <a href="https://www.veracode.com/security/security-hotspots" class="expandable-resource-link">Veracode Hotspots</a>
+                                <a href="https://owasp.org/www-project-risk-assessment-framework/" class="expandable-resource-link">OWASP Risk Framework</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>Developer Training: AI-powered secure coding guidance</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>👨‍💻 Intelligent Security Education</h5>
+                            <p>Leverage AI to provide personalized, context-aware security training that adapts to each developer's skill level and code patterns.</p>
+                            <ul>
+                                <li><strong>Personalized Learning:</strong> AI-customized training paths</li>
+                                <li><strong>Real-time Coaching:</strong> In-IDE security suggestions</li>
+                                <li><strong>Skill Assessment:</strong> AI-powered competency evaluation</li>
+                                <li><strong>Gamification:</strong> Security challenges and competitions</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://github.com/features/copilot" class="expandable-resource-link">GitHub Copilot</a>
+                                <a href="https://www.securecodewarrior.com/" class="expandable-resource-link">Secure Code Warrior</a>
+                                <a href="https://www.checkmarx.com/resource/documents/en/34-checkmarx-codebashing-datasheet-813.pdf" class="expandable-resource-link">Checkmarx Codebashing</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>Feedback Loops: Improve AI accuracy with developer input</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>🔄 Continuous Learning Systems</h5>
+                            <p>Create feedback mechanisms that allow AI security models to learn from developer decisions and improve accuracy over time.</p>
+                            <ul>
+                                <li><strong>Human-in-the-Loop:</strong> Developer feedback integration</li>
+                                <li><strong>False Positive Reduction:</strong> Learning from dismissals</li>
+                                <li><strong>Model Retraining:</strong> Automated improvement cycles</li>
+                                <li><strong>Performance Metrics:</strong> Accuracy tracking and reporting</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://mlflow.org/docs/latest/model-evaluation/index.html" class="expandable-resource-link">MLflow Evaluation</a>
+                                <a href="https://www.wandb.ai/" class="expandable-resource-link">Weights & Biases</a>
+                                <a href="https://neptune.ai/" class="expandable-resource-link">Neptune AI</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>Compliance Automation: Automated security standard validation</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>📋 AI-Driven Compliance Monitoring</h5>
+                            <p>Automate compliance checking against security standards using AI to ensure continuous adherence to regulatory requirements.</p>
+                            <ul>
+                                <li><strong>Standard Mapping:</strong> AI maps code to compliance requirements</li>
+                                <li><strong>Automated Auditing:</strong> Continuous compliance verification</li>
+                                <li><strong>Gap Analysis:</strong> AI identifies compliance deficiencies</li>
+                                <li><strong>Reporting:</strong> Automated compliance dashboards</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://www.checkov.io/" class="expandable-resource-link">Checkov</a>
+                                <a href="https://github.com/aquasecurity/tfsec" class="expandable-resource-link">tfsec</a>
+                                <a href="https://www.bridgecrew.io/" class="expandable-resource-link">Bridgecrew</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 7: Automated Vulnerability Remediation -->
+        <div class="chapter" id="chapter7">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 7</div>
+                <h2 class="chapter-title">Automated Vulnerability Remediation</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                The holy grail of security automation: systems that not only detect vulnerabilities but automatically fix them. Learn how to build AI-powered remediation that patches, updates, and secures systems autonomously.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The Vulnerability Management Crisis</h3>
+                <p>
+                    Organizations discover 22,000 new vulnerabilities annually, but remediate only 60% within a year. AI-powered automated remediation can fix vulnerabilities in minutes, not months. According to Ponemon Institute, automated remediation reduces vulnerability exposure time by 95%.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Automated Remediation Technologies</h3>
+                <div class="content-showcase">
+                    <div class="tools-grid">
+                        <a href="https://www.rapid7.com/products/insightvm/" class="tool-card">
+                            <h4>Rapid7 InsightVM</h4>
+                            <p>AI-powered vulnerability management with auto-remediation</p>
+                        </a>
+                        <a href="https://www.qualys.com/apps/vulnerability-management/" class="tool-card">
+                            <h4>Qualys VMDR</h4>
+                            <p>Continuous vulnerability detection and response</p>
+                        </a>
+                        <a href="https://www.tenable.com/products/nessus" class="tool-card">
+                            <h4>Tenable.io</h4>
+                            <p>Cloud-based vulnerability assessment with AI insights</p>
+                        </a>
+                        <a href="https://www.redhat.com/en/technologies/management/insights" class="tool-card">
+                            <h4>Red Hat Insights</h4>
+                            <p>Predictive analytics and automated remediation</p>
+                        </a>
+                        <a href="https://www.microsoft.com/en-us/security/business/threat-protection/microsoft-defender-vulnerability-management" class="tool-card">
+                            <h4>Microsoft Defender</h4>
+                            <p>Integrated vulnerability management and remediation</p>
+                        </a>
+                        <a href="https://www.cynerio.com/" class="tool-card">
+                            <h4>Cynerio Healthcare</h4>
+                            <p>IoT/OT vulnerability management with AI</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Building Automated Remediation Systems</h3>
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🤖 Remediation Automation Levels</h4>
+                    <table>
+                        <tr>
+                            <th>Level</th>
+                            <th>Description</th>
+                            <th>Human Involvement</th>
+                            <th>Risk Level</th>
+                        </tr>
+                        <tr>
+                            <td>Level 1</td>
+                            <td>Automated Detection & Alerting</td>
+                            <td>Manual remediation</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Level 2</td>
+                            <td>Suggested Remediation</td>
+                            <td>Approval required</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Level 3</td>
+                            <td>Conditional Auto-Remediation</td>
+                            <td>Pre-approved actions</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Level 4</td>
+                            <td>Autonomous Remediation</td>
+                            <td>Post-action notification</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>Level 5</td>
+                            <td>Predictive Prevention</td>
+                            <td>Minimal oversight</td>
+                            <td>High</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI Remediation Best Practices</h3>
+                <ol>
+                    <li><strong><a href="https://www.nist.gov/itl/smallbusinesscyber/planning-guides/patch-management">Risk-Based Prioritization:</a></strong> AI-powered CVSS scoring and business impact</li>
+                    <li><strong><a href="https://www.cisecurity.org/controls/v8/">Staged Rollout:</a></strong> Test environments before production</li>
+                    <li><strong><a href="https://www.sans.org/white-papers/36367/">Rollback Capabilities:</a></strong> Automated recovery from failed patches</li>
+                    <li><strong><a href="https://csrc.nist.gov/publications/detail/sp/800-40/rev-3/final">Change Management:</a></strong> Integration with ITSM workflows</li>
+                    <li><strong><a href="https://www.gartner.com/en/information-technology/glossary/continuous-compliance-monitoring">Compliance Tracking:</a></strong> Automated audit trails and reporting</li>
+                    <li><strong><a href="https://www.mitre.org/publications/systems-engineering-guide/se-lifecycle-building-blocks/test-and-evaluation">Testing Automation:</a></strong> Validate patches don't break functionality</li>
+                </ol>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Case Study: Netflix's Auto-Remediation</h3>
+                <p>
+                    Netflix's security team built an AI system that automatically patches 95% of vulnerabilities without human intervention. Their system analyzes vulnerability impact, tests patches in staging, and rolls out fixes with automated rollback capabilities, reducing MTTR from weeks to hours.
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 8: Cloud-Native AI Security Architecture -->
+        <div class="chapter" id="chapter8">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 8</div>
+                <h2 class="chapter-title">Cloud-Native AI Security Architecture</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                Cloud-native environments require AI security architectures that are distributed, scalable, and resilient. Learn how to design security systems that protect modern cloud applications and infrastructure.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">Cloud-Native Security Challenges</h3>
+                <p>
+                    Traditional perimeter-based security fails in cloud-native environments. With containers, microservices, and serverless functions, the attack surface is distributed and dynamic. AI-powered security provides the intelligence and automation needed to secure complex cloud architectures at scale.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Cloud Security & Compliance</h3>
+                <div class="highlight-section">
+                    <h3 style="color: white; text-align: center; margin-bottom: 30px;">🏆 Cloud Security Certifications & Compliance</h3>
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                        <p style="text-align: center; font-weight: 600; margin-bottom: 0;">
+                            🎯 Essential certifications and compliance frameworks for cloud security!
+                        </p>
+                    </div>
+                    
+                    <div class="cert-grid">
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">☁️</div>
+                            <h4>AWS Security</h4>
+                            <p><strong>Cert:</strong> AWS Certified Security - Specialty</p>
+                            <p><strong>Avg Salary:</strong> $165K - $195K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Cloud security architect skills</p>
+                            <a href="https://aws.amazon.com/certification/certified-security-specialty/">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🔐</div>
+                            <h4>CCSP</h4>
+                            <p><strong>Cert:</strong> Certified Cloud Security Professional</p>
+                            <p><strong>Avg Salary:</strong> $170K - $200K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Vendor-neutral cloud security</p>
+                            <a href="https://www.isc2.org/Certifications/CCSP">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">📋</div>
+                            <h4>SOC 2 Compliance</h4>
+                            <p><strong>Focus:</strong> Security, availability, confidentiality</p>
+                            <p><strong>Required for:</strong> SaaS providers</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Trust services criteria</p>
+                            <a href="https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/sorhome">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🏛️</div>
+                            <h4>GDPR Compliance</h4>
+                            <p><strong>Focus:</strong> Data protection and privacy</p>
+                            <p><strong>Penalty:</strong> Up to 4% global revenue</p>
+                            <p style="margin-top: 15px; font-size: 14px;">EU data protection</p>
+                            <a href="https://gdpr.eu/">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">💳</div>
+                            <h4>PCI-DSS</h4>
+                            <p><strong>Focus:</strong> Payment card data security</p>
+                            <p><strong>Levels:</strong> 1-4 based on volume</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Payment security standard</p>
+                            <a href="https://www.pcisecuritystandards.org/">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🏥</div>
+                            <h4>HIPAA</h4>
+                            <p><strong>Focus:</strong> Healthcare data protection</p>
+                            <p><strong>Requirements:</strong> Technical safeguards</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Healthcare compliance</p>
+                            <a href="https://www.hhs.gov/hipaa/index.html">Learn More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI-Powered Cloud Security Architecture</h3>
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🛡️ Core Security Components</h4>
+                    <ul>
+                        <li><strong>Cloud Security Posture Management (CSPM):</strong> AI-powered configuration monitoring</li>
+                        <li><strong>Cloud Workload Protection (CWPP):</strong> Runtime security for containers and VMs</li>
+                        <li><strong>Cloud Infrastructure Entitlement Management (CIEM):</strong> AI-driven access control</li>
+                        <li><strong>Data Security Posture Management (DSPM):</strong> AI-powered data discovery and classification</li>
+                        <li><strong>DevSecOps Integration:</strong> Security embedded in CI/CD pipelines</li>
+                        <li><strong>Zero Trust Network Access (ZTNA):</strong> Identity-based access control</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Cloud Security Best Practices</h3>
+                <ol>
+                    <li><strong><a href="https://aws.amazon.com/iam/features/mfa/">Identity & Access Management:</a></strong> Zero trust, MFA everywhere</li>
+                    <li><strong><a href="https://cloud.google.com/security-command-center">Cloud Security Posture Management:</a></strong> Continuous monitoring</li>
+                    <li><strong><a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/encryption-overview">Encryption Everywhere:</a></strong> At rest and in transit</li>
+                    <li><strong><a href="https://aws.amazon.com/cloudtrail/">Audit Logging:</a></strong> Comprehensive activity tracking</li>
+                    <li><strong><a href="https://cloud.google.com/vpc/docs/vpc">Network Segmentation:</a></strong> Defense in depth</li>
+                    <li><strong><a href="https://aws.amazon.com/config/">Compliance Automation:</a></strong> Continuous compliance</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 9: Zero Trust & AI-Powered Access Control -->
+        <div class="chapter" id="chapter9">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 9</div>
+                <h2 class="chapter-title">Zero Trust & AI-Powered Access Control</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                Zero Trust represents the future of security architecture. Learn how AI enhances Zero Trust principles with intelligent access decisions, behavioral analytics, and adaptive authentication.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The Zero Trust Security Model</h3>
+                <p>
+                    Traditional perimeter security assumes everything inside the network is trusted. Zero Trust assumes breach and verifies every access request. With AI, Zero Trust systems make intelligent decisions based on user behavior, device health, and contextual factors.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI-Enhanced Zero Trust Components</h3>
+                <div class="content-showcase">
+                    <div class="tools-grid">
+                        <a href="https://www.microsoft.com/en-us/security/business/identity-access-management/azure-active-directory" class="tool-card">
+                            <h4>Azure AD Zero Trust</h4>
+                            <p>AI-powered identity and access management</p>
+                        </a>
+                        <a href="https://www.okta.com/zero-trust/" class="tool-card">
+                            <h4>Okta Identity Engine</h4>
+                            <p>Intelligent access decisions with ML</p>
+                        </a>
+                        <a href="https://www.zscaler.com/solutions/zero-trust-exchange" class="tool-card">
+                            <h4>Zscaler Zero Trust</h4>
+                            <p>Cloud-native zero trust platform</p>
+                        </a>
+                        <a href="https://www.crowdstrike.com/products/zero-trust-assessment/" class="tool-card">
+                            <h4>CrowdStrike ZTA</h4>
+                            <p>Zero trust assessment with behavioral AI</p>
+                        </a>
+                        <a href="https://www.paloaltonetworks.com/sase/ztna" class="tool-card">
+                            <h4>Palo Alto ZTNA</h4>
+                            <p>Zero trust network access with AI</p>
+                        </a>
+                        <a href="https://www.beyondtrust.com/solutions/zero-trust" class="tool-card">
+                            <h4>BeyondTrust Zero Trust</h4>
+                            <p>Privileged access with zero trust principles</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">AI-Powered Access Control</h3>
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🔒 Zero Trust Principles Enhanced by AI</h4>
+                    <ul>
+                        <li><strong>Never Trust, Always Verify:</strong> AI analyzes every access request
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.nist.gov/publications/zero-trust-architecture" class="resource-link">NIST Zero Trust</a>
+                                <a href="https://www.youtube.com/watch?v=wVJc6YRjnBg" class="resource-link">Zero Trust Explained</a>
+                                <a href="https://cloud.google.com/beyondcorp" class="resource-link">Google BeyondCorp</a>
+                            </div>
+                        </li>
+                        <li><strong>Least Privilege Access:</strong> AI determines minimal required permissions
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/secure-least-privileged-access" class="resource-link">Least Privilege Guide</a>
+                                <a href="https://www.youtube.com/watch?v=1z-8p5WP6lE" class="resource-link">PAM Implementation</a>
+                                <a href="https://www.okta.com/identity-101/least-privilege-access/" class="resource-link">Identity Management</a>
+                            </div>
+                        </li>
+                        <li><strong>Microsegmentation:</strong> AI-driven network and application segmentation
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                                <a href="https://www.paloaltonetworks.com/cyberpedia/what-is-microsegmentation" class="resource-link">Microsegmentation</a>
+                                <a href="https://www.youtube.com/watch?v=aIqk5j8xZ8I" class="resource-link">Network Segmentation</a>
+                                <a href="https://www.guardicore.com/use-cases/micro-segmentation/" class="resource-link">Implementation Guide</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Implementing AI-Enhanced Zero Trust</h3>
+                <ol>
+                    <li><strong><a href="https://www.microsoft.com/en-us/security/business/zero-trust">Identity Verification:</a></strong> Continuous authentication with behavioral biometrics</li>
+                    <li><strong><a href="https://www.okta.com/products/adaptive-authentication/">Device Trust:</a></strong> AI-powered device compliance and health checks</li>
+                    <li><strong><a href="https://www.zscaler.com/solutions/cloud-access-security-broker">Application Security:</a></strong> Micro-segmentation and application-aware policies</li>
+                    <li><strong><a href="https://www.crowdstrike.com/cybersecurity-101/zero-trust-security/">Data Protection:</a></strong> AI-driven data classification and access controls</li>
+                    <li><strong><a href="https://www.paloaltonetworks.com/cyberpedia/what-is-infrastructure-as-code">Infrastructure Security:</a></strong> Policy-as-code for infrastructure access</li>
+                    <li><strong><a href="https://www.sans.org/white-papers/41013/">Network Security:</a></strong> Software-defined perimeters with AI analytics</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 10: AI Security Operations (AIOps) -->
+        <div class="chapter" id="chapter10">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 10</div>
+                <h2 class="chapter-title">AI Security Operations (AIOps)</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                AIOps transforms security operations from reactive incident response to proactive threat hunting and autonomous security management. Learn how to build intelligent SOCs that operate at machine speed.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The Evolution to AIOps</h3>
+                <p>
+                    Traditional SOCs are overwhelmed by alert volume and struggle to keep pace with sophisticated threats. AIOps leverages machine learning to automate threat detection, investigation, and response while augmenting human analysts with AI insights.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">🚨 Security Operations Stack</h3>
+                <div class="highlight-section">
+                    <p style="margin-bottom: 30px;">Building comprehensive security monitoring and response</p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                        <p style="text-align: center; font-weight: 600; margin-bottom: 0;">
+                            💡 Click on the tabs below to explore different security operations tools!
+                        </p>
+                    </div>
+                    
+                    <div class="resource-tabs">
+                        <button class="tab-button active" onclick="showTab('siem-ops')">📊 SIEM</button>
+                        <button class="tab-button" onclick="showTab('soar-ops')">🤖 SOAR</button>
+                        <button class="tab-button" onclick="showTab('threat-intel-ops')">🕵️ Threat Intel</button>
+                        <button class="tab-button" onclick="showTab('incident-response-ops')">🚑 Incident Response</button>
+                    </div>
+
+                    <!-- SIEM Tab -->
+                    <div id="siem-ops" class="tab-content active">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>Splunk Enterprise</h4>
+                                <p>Industry-leading SIEM platform with AI/ML capabilities</p>
+                                <a href="https://www.splunk.com/en_us/software/enterprise-security.html">Learn Splunk →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Elastic Security</h4>
+                                <p>Open-source SIEM with machine learning detection</p>
+                                <a href="https://www.elastic.co/security">Elastic SIEM →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Azure Sentinel</h4>
+                                <p>Cloud-native SIEM with AI-powered analytics</p>
+                                <a href="https://azure.microsoft.com/en-us/services/azure-sentinel/">Azure Sentinel →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SOAR Tab -->
+                    <div id="soar-ops" class="tab-content">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>Phantom (Splunk)</h4>
+                                <p>Security orchestration with AI-driven playbooks</p>
+                                <a href="https://www.splunk.com/en_us/software/splunk-security-orchestration-and-automation.html">Phantom SOAR →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>Cortex XSOAR</h4>
+                                <p>AI-enhanced security orchestration platform</p>
+                                <a href="https://www.paloaltonetworks.com/cortex/xsoar">Cortex XSOAR →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>TheHive</h4>
+                                <p>Open-source incident response with ML capabilities</p>
+                                <a href="https://thehive-project.org/">TheHive Project →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Threat Intel Tab -->
+                    <div id="threat-intel-ops" class="tab-content">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>MITRE ATT&CK</h4>
+                                <p>Adversary tactics framework with AI mapping</p>
+                                <a href="https://attack.mitre.org/">ATT&CK Framework →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>ThreatConnect</h4>
+                                <p>AI-powered threat intelligence platform</p>
+                                <a href="https://threatconnect.com/">ThreatConnect →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>AlienVault OTX</h4>
+                                <p>Collaborative threat intelligence with ML</p>
+                                <a href="https://otx.alienvault.com/">OTX Platform →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Incident Response Tab -->
+                    <div id="incident-response-ops" class="tab-content">
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <h4>PagerDuty</h4>
+                                <p>AI-powered incident orchestration and response</p>
+                                <a href="https://www.pagerduty.com/platform/incident-response/">PagerDuty IR →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>SANS Incident Handling</h4>
+                                <p>Industry-standard incident response methodology</p>
+                                <a href="https://www.sans.org/cyber-security-courses/incident-handler/">SANS Training →</a>
+                            </div>
+                            <div class="resource-card">
+                                <h4>NIST Framework</h4>
+                                <p>Computer security incident handling guide</p>
+                                <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf">NIST 800-61 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Building AI-Powered SOCs</h3>
+                <ol>
+                    <li><strong><a href="https://www.sans.org/white-papers/33901/">Preparation:</a></strong> AI-enhanced incident response planning</li>
+                    <li><strong><a href="https://www.crowdstrike.com/cybersecurity-101/incident-response/">Detection & Analysis:</a></strong> Machine learning threat detection</li>
+                    <li><strong><a href="https://www.cisa.gov/incident-response-playbooks">Containment:</a></strong> Automated threat containment and isolation</li>
+                    <li><strong><a href="https://www.sans.org/reading-room/whitepapers/incident/incident-handlers-handbook-33901">Eradication:</a></strong> AI-driven threat elimination</li>
+                    <li><strong><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-184.pdf">Recovery:</a></strong> Intelligent system restoration</li>
+                    <li><strong><a href="https://www.atlassian.com/incident-management/postmortem">Lessons Learned:</a></strong> AI-powered pattern analysis</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 11: Building AI-First Security Culture -->
+        <div class="chapter" id="chapter11">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 11</div>
+                <h2 class="chapter-title">Building AI-First Security Culture</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                Culture is the foundation of successful AI security transformation. Learn how to build organizations where AI-powered security is embraced, understood, and continuously improved by every team member.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">The AI Security Cultural Shift</h3>
+                <p>
+                    Implementing AI security technology is only 20% of the challenge—the other 80% is cultural transformation. Organizations must evolve from traditional security mindsets to AI-first approaches that embrace automation, continuous learning, and data-driven decision making.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Building AI Security Champions</h3>
+                <div class="content-showcase">
+                    <h4 class="subsection-title">🏆 AI Security Champion Program</h4>
+                    <ul>
+                        <li><strong>Selection Criteria:</strong> Technical aptitude and passion for AI security</li>
+                        <li><strong>Training Path:</strong> ML fundamentals, security automation, and AI ethics</li>
+                        <li><strong>Responsibilities:</strong> AI security advocacy and knowledge sharing</li>
+                        <li><strong>Recognition:</strong> Career advancement and industry visibility</li>
+                    </ul>
+                    
+                    <h4 class="subsection-title">👥 AI-First Team Structures</h4>
+                    <ul>
+                        <li><strong>AI Security Center of Excellence:</strong> Strategic AI security guidance</li>
+                        <li><strong>Embedded AI Engineers:</strong> AI specialists in security teams</li>
+                        <li><strong>Cross-Functional AI Guild:</strong> Knowledge sharing community</li>
+                        <li><strong>AI Red Team:</strong> Adversarial AI testing and validation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">📚 DevSecOps Skills & Development</h3>
+                <div class="highlight-section">
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                        <p style="text-align: center; font-weight: 600; margin-bottom: 0;">
+                            🎯 Essential skills and certifications for AI-powered DevSecOps professionals!
+                        </p>
+                    </div>
+                    
+                    <div class="cert-grid">
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🤖</div>
+                            <h4>AI Security Engineer</h4>
+                            <p><strong>Focus:</strong> ML-powered security systems</p>
+                            <p><strong>Avg Salary:</strong> $185K - $225K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">AI and security expertise</p>
+                            <a href="https://www.coursera.org/professional-certificates/google-cybersecurity">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🛡️</div>
+                            <h4>CEH (AI Enhanced)</h4>
+                            <p><strong>Cert:</strong> Certified Ethical Hacker with AI</p>
+                            <p><strong>Avg Salary:</strong> $155K - $185K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">AI-powered offensive security</p>
+                            <a href="https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🔍</div>
+                            <h4>CSSLP</h4>
+                            <p><strong>Cert:</strong> Certified Secure Software Lifecycle Professional</p>
+                            <p><strong>Avg Salary:</strong> $165K - $195K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Secure SDLC with AI integration</p>
+                            <a href="https://www.isc2.org/Certifications/CSSLP">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">☸️</div>
+                            <h4>CKS</h4>
+                            <p><strong>Cert:</strong> Certified Kubernetes Security Specialist</p>
+                            <p><strong>Avg Salary:</strong> $175K - $205K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Container security with AI</p>
+                            <a href="https://www.cncf.io/certification/cks/">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🎓</div>
+                            <h4>SANS AI Security</h4>
+                            <p><strong>Focus:</strong> AI/ML security implementation</p>
+                            <p><strong>Avg Salary:</strong> $190K - $230K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">Advanced AI security training</p>
+                            <a href="https://www.sans.org/cyber-security-courses/">Learn More →</a>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <div style="font-size: 48px; margin-bottom: 20px;">📊</div>
+                            <h4>CISSP (AI Focus)</h4>
+                            <p><strong>Cert:</strong> Information Security Professional with AI</p>
+                            <p><strong>Avg Salary:</strong> $195K - $240K</p>
+                            <p style="margin-top: 15px; font-size: 14px;">AI security leadership</p>
+                            <a href="https://www.isc2.org/Certifications/CISSP">Learn More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Creating an AI Security Culture</h3>
+                <ol>
+                    <li><strong><a href="https://www.sans.org/security-awareness-training/">AI Security Training:</a></strong> Role-specific AI security education</li>
+                    <li><strong><a href="https://owasp.org/www-project-security-culture/">AI Security Challenges:</a></strong> Competitions and hackathons</li>
+                    <li><strong><a href="https://www.bugcrowd.com/resources/guides/how-to-implement-a-bug-bounty-program/">AI Bug Bounties:</a></strong> Reward AI security discoveries</li>
+                    <li><strong><a href="https://www.atlassian.com/incident-management/postmortem/blameless">Learning Culture:</a></strong> Blameless postmortems for AI failures</li>
+                    <li><strong><a href="https://cloud.google.com/architecture/devops/devops-measurement-security-and-compliance">AI Security Metrics:</a></strong> Measure and communicate AI security value</li>
+                    <li><strong><a href="https://www.devsecops.org/blog/2022/1/20/executive-buy-in">Executive AI Commitment:</a></strong> Leadership support for AI transformation</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Chapter 12: Future of AI-Powered DevSecOps (2025-2030) -->
+        <div class="chapter" id="chapter12">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 12</div>
+                <h2 class="chapter-title">Future of AI-Powered DevSecOps (2025-2030)</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                The next five years will bring unprecedented changes to AI-powered security. Here's what's coming and how to prepare for the intelligent security challenges and opportunities of tomorrow.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">🚀 Emerging AI Security Trends</h3>
+                
+                <div class="content-showcase" style="background: linear-gradient(135deg, #1a1a2e, #0f1b3c); color: white; padding: 40px; border-radius: 15px; border-left: 5px solid #FF6B6B;">
+                    <h4 style="font-size: 24px; color: #FF6B6B; margin-bottom: 30px;">1. Autonomous Security Systems</h4>
+                    <p style="font-size: 18px; margin-bottom: 20px; color: white;">By 2028, 75% of security operations will be fully autonomous</p>
+                    <ul style="font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
+                        <li><strong>Self-Healing Infrastructure:</strong> Systems that detect and fix vulnerabilities automatically</li>
+                        <li><strong>Predictive Threat Prevention:</strong> AI predicting and blocking attacks before execution</li>
+                        <li><strong>Autonomous Incident Response:</strong> Complete end-to-end automated security operations</li>
+                    </ul>
+                    
+                    <h4 style="font-size: 24px; color: #4ECDC4; margin-top: 40px; margin-bottom: 20px;">2. Quantum-Resistant AI Security</h4>
+                    <p style="font-size: 18px; margin-bottom: 20px; color: white;">Preparing for post-quantum cryptography and quantum AI</p>
+                    <ul style="font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
+                        <li><strong>Quantum-Safe ML Models:</strong> AI systems resistant to quantum attacks</li>
+                        <li><strong>Quantum Key Distribution:</strong> Unhackable communication channels</li>
+                        <li><strong>Post-Quantum Algorithms:</strong> NIST-approved quantum-resistant security</li>
+                    </ul>
+                    
+                    <h4 style="font-size: 24px; color: #FFE66D; margin-top: 40px; margin-bottom: 20px;">3. AI Security Mesh</h4>
+                    <p style="font-size: 18px; margin-bottom: 20px; color: white;">Distributed AI security across all digital touchpoints</p>
+                    <ul style="font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
+                        <li><strong>Edge AI Security:</strong> Real-time threat detection at network edge</li>
+                        <li><strong>Federated Security Learning:</strong> Collaborative AI without data sharing</li>
+                        <li><strong>Zero Trust AI Mesh:</strong> AI-powered micro-segmentation everywhere</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">💰 AI Security Market Evolution</h3>
+                <table>
+                    <tr>
+                        <th>Year</th>
+                        <th>Market Size</th>
+                        <th>AI Security Engineers</th>
+                        <th>Average Salary</th>
+                        <th>Key Developments</th>
+                    </tr>
+                    <tr>
+                        <td>2025</td>
+                        <td>$5.9B</td>
+                        <td>180K professionals</td>
+                        <td>$185K</td>
+                        <td>AI SOAR mainstream adoption</td>
+                    </tr>
+                    <tr>
+                        <td>2026</td>
+                        <td>$9.2B</td>
+                        <td>320K professionals</td>
+                        <td>$205K</td>
+                        <td>Autonomous threat response</td>
+                    </tr>
+                    <tr>
+                        <td>2027</td>
+                        <td>$14.8B</td>
+                        <td>520K professionals</td>
+                        <td>$225K</td>
+                        <td>Quantum-resistant AI security</td>
+                    </tr>
+                    <tr>
+                        <td>2028</td>
+                        <td>$23.6B</td>
+                        <td>850K professionals</td>
+                        <td>$250K</td>
+                        <td>AI security mesh deployment</td>
+                    </tr>
+                    <tr>
+                        <td>2030</td>
+                        <td>$45.2B</td>
+                        <td>1.8M+ professionals</td>
+                        <td>$300K+</td>
+                        <td>Fully autonomous security</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">🎯 Preparing for the AI Security Future</h3>
+                <div class="highlight-section" style="text-align: center;">
+                    <h4 style="font-size: 28px; margin-bottom: 30px;">Your AI-Powered Security Future</h4>
+                    <p style="font-size: 20px; margin-bottom: 30px;">
+                        The future of security is autonomous, intelligent, and adaptive. AI security professionals who master machine learning, quantum computing, and autonomous systems will lead the next generation of cybersecurity.
+                    </p>
+                    <div style="font-size: 24px; font-weight: bold; margin-bottom: 30px;">
+                        Master AI → Build Autonomous Security → Shape the Future
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px;">
+                        <p style="font-size: 18px; margin-bottom: 0;">
+                            The organizations that thrive in 2030 will be those that embrace AI-first security today. Start your transformation now to lead tomorrow's intelligent security landscape.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Key Technologies to Watch</h3>
+                <ol>
+                    <li><strong><a href="https://www.nist.gov/news-events/news/2022/07/nist-announces-first-four-quantum-resistant-cryptographic-algorithms">Post-Quantum Cryptography:</a></strong> Quantum-resistant security algorithms</li>
+                    <li><strong><a href="https://www.gartner.com/en/information-technology/glossary/cybersecurity-mesh">Cybersecurity Mesh:</a></strong> Distributed, composable security architecture</li>
+                    <li><strong><a href="https://www.microsoft.com/en-us/research/project/homomorphic-encryption/">Homomorphic Encryption:</a></strong> Computation on encrypted data</li>
+                    <li><strong><a href="https://www.ibm.com/quantum/what-is-quantum-computing">Quantum Machine Learning:</a></strong> Quantum-enhanced AI algorithms</li>
+                    <li><strong><a href="https://www.nvidia.com/en-us/autonomous-machines/">Autonomous Security:</a></strong> Self-managing security systems</li>
+                    <li><strong><a href="https://www.gartner.com/en/information-technology/glossary/extended-detection-and-response-xdr">Next-Gen XDR:</a></strong> AI-native extended detection and response</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="chapter" id="conclusion">
+            <div class="chapter-header">
+                <div class="chapter-number">Conclusion</div>
+                <h2 class="chapter-title">Your AI-Powered Security Journey</h2>
+            </div>
+            
+            <p class="chapter-intro">
+                You've completed your comprehensive journey through AI-Powered DevSecOps. Now it's time to transform this knowledge into action and build the intelligent security systems that will protect tomorrow's digital world.
+            </p>
+            
+            <div class="section">
+                <h3 class="section-title">🎯 Key Transformational Insights</h3>
+                <div class="content-showcase">
+                    <ul>
+                        <li><strong>AI is the Future of Security:</strong> Machine learning transforms security from reactive to predictive</li>
+                        <li><strong>Automation Scales Human Intelligence:</strong> AI augments human capabilities rather than replacing them</li>
+                        <li><strong>Data is the Foundation:</strong> Quality data enables effective AI security models</li>
+                        <li><strong>Continuous Learning is Critical:</strong> AI security systems must evolve with emerging threats</li>
+                        <li><strong>Culture Drives Technology:</strong> Successful AI adoption requires organizational transformation</li>
+                        <li><strong>Zero Trust is AI-Enhanced:</strong> Intelligent access decisions based on behavioral analytics</li>
+                        <li><strong>Security is Everyone's Responsibility:</strong> AI democratizes security expertise across teams</li>
+                        <li><strong>The Future is Autonomous:</strong> Self-healing, self-protecting systems are coming</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">🚀 Your AI Security Action Plan</h3>
+                <ol>
+                    <li><strong>Assess Your AI Readiness:</strong> Evaluate current security maturity and AI capabilities</li>
+                    <li><strong>Start with High-Impact Use Cases:</strong> Implement AI for alert triage and threat detection</li>
+                    <li><strong>Build AI Security Skills:</strong> Invest in machine learning and security automation training</li>
+                    <li><strong>Implement Gradually:</strong> Pilot AI security tools before full-scale deployment</li>
+                    <li><strong>Measure and Iterate:</strong> Track AI security metrics and continuously improve</li>
+                    <li><strong>Foster AI Culture:</strong> Build AI security champions and cross-functional teams</li>
+                    <li><strong>Prepare for the Future:</strong> Stay current with quantum computing and autonomous security</li>
+                </ol>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">The AI-Powered Security Promise</h3>
+                <p>
+                    AI-Powered DevSecOps represents more than a technological evolution—it's a fundamental transformation in how we think about security. It's about creating intelligent systems that don't just respond to threats, but predict and prevent them before they materialize.
+                </p>
+                <p>
+                    The organizations that excel at AI-powered security will be the ones that thrive in an increasingly sophisticated threat landscape. They'll detect threats in milliseconds, respond automatically, and continuously learn from every interaction.
+                </p>
+                
+                <div class="highlight-section" style="text-align: center;">
+                    <h4 style="font-size: 28px; margin-bottom: 20px;">Your Security Transformation Awaits</h4>
+                    <p style="font-size: 22px; line-height: 1.6; margin-bottom: 30px;">
+                        The future belongs to those who embrace AI-powered security today. You now have the knowledge, tools, and strategies to build intelligent security systems that will protect tomorrow's digital infrastructure.
+                    </p>
+                    <p style="font-size: 24px; font-weight: 600; margin-bottom: 0;">
+                        The age of AI security is here—and you're ready to lead it.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Continue Your Journey</h3>
+                <div class="content-showcase">
+                    <h4>Next Steps for AI Security Mastery</h4>
+                    <ul>
+                        <li><strong>Join AI Security Communities:</strong> Connect with fellow practitioners and thought leaders</li>
+                        <li><strong>Contribute to Open Source:</strong> Build and improve AI security tools</li>
+                        <li><strong>Attend AI Security Conferences:</strong> Stay current with latest research and trends</li>
+                        <li><strong>Pursue Advanced Certifications:</strong> Validate your AI security expertise</li>
+                        <li><strong>Mentor Others:</strong> Share your knowledge and build the next generation</li>
+                        <li><strong>Innovate and Experiment:</strong> Push the boundaries of AI security possibilities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- About the Author -->
+        <div class="author-page" id="about">
+            <h2 class="author-page-title">About the Author</h2>
+            
+            <div class="author-profile-circle" onclick="document.getElementById('profile-upload').click()">
+                <span id="profile-placeholder" style="font-size: 60px;">👨‍💻</span>
+                <img id="profile-image" class="author-profile-image" style="display: none;" alt="Brine Ketum">
+                <div class="profile-upload-overlay">
+                    <span>Upload Photo</span>
+                </div>
+            </div>
+            
+            <h3 class="author-page-name">Brine Ketum</h3>
+            <p class="author-page-tagline">AI Security Pioneer & ML-Driven Defense Expert</p>
+            
+            <div class="author-bio-content">
+                <p>
+                    Brine Ketum is a visionary AI security engineer and DevSecOps expert with over 8 years of hands-on experience building intelligent security systems powered by machine learning. As an AI security pioneer, Brine is dedicated to leveraging artificial intelligence to transform security from reactive to predictive, enabling organizations to stay ahead of sophisticated threats.
+                </p>
+                <p>
+                    Throughout his career, Brine has architected and implemented cutting-edge AI-powered security solutions that have revolutionized how organizations detect and respond to threats. His expertise spans the entire AI security spectrum, from building ML models for behavioral threat detection to securing AI/ML pipelines against adversarial attacks and model poisoning.
+                </p>
+                <p>
+                    Driven by a deep belief that AI represents the future of cybersecurity, Brine has led transformational initiatives that reduced threat detection time from days to milliseconds, achieved 99.9% accuracy in anomaly detection, and automated 85% of security operations through intelligent systems. His work demonstrates that AI doesn't replace human security expertise—it amplifies it exponentially.
+                </p>
+                <p>
+                    With certifications across major cloud providers, deep expertise in machine learning frameworks like TensorFlow and PyTorch, and mastery of security tools from SIEM to SOAR platforms, Brine brings a unique perspective to AI-powered DevSecOps. He has successfully implemented AI security programs for organizations ranging from innovative startups to Fortune 500 enterprises, always focusing on measurable outcomes and business value.
+                </p>
+                <p>
+                    As both a practitioner and thought leader, Brine is passionate about democratizing AI security knowledge and building the next generation of intelligent defense systems. He regularly speaks at AI and security conferences, contributes to open-source ML security projects, and mentors emerging AI security professionals. This book represents his commitment to sharing the transformative power of AI-driven security with the global cybersecurity community.
+                </p>
+            </div>
+            
+            <div class="author-connect">
+                <h3>Connect with Brine</h3>
+                <div class="social-links-large">
+                    <a href="https://linkedin.com/in/brine-ndam-ketum-6ab435231" class="social-link-large">
+                        <span class="social-icon">🔗</span>
+                        LinkedIn
+                    </a>
+                    <a href="https://x.com/BrineKetum" class="social-link-large">
+                        <span class="social-icon">🐦</span>
+                        Twitter/X
+                    </a>
+                    <a href="mailto:brineketum@gmail.com" class="social-link-large">
+                        <span class="social-icon">📧</span>
+                        Email
+                    </a>
+                    <a href="https://github.com/brineketum" class="social-link-large">
+                        <span class="social-icon">💻</span>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <div class="author-quote">
+                <p>"In the age of AI, security is no longer about building higher walls—it's about building smarter systems that learn, adapt, and protect themselves. The future of security is intelligent, autonomous, and unstoppable. We're not just defending against today's threats; we're predicting and preventing tomorrow's attacks before they're even conceived."</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="ebook-footer">
+            <p class="copyright">© 2025 Brine Ketum. All rights reserved.</p>
+            <p>Mastering AI-Powered DevSecOps: Building Intelligent Security Automation for Modern Software Delivery</p>
+            <p style="font-size: 14px; opacity: 0.7; margin-top: 20px;">
+                First Edition • Published 2025 • AI Security Transformation Guide
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        // Smooth scrolling for table of contents links
+        document.querySelectorAll('.toc-item a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation to sections on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Expandable sections functionality
+        function toggleExpandable(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            
+            // Close all other expandable items in the same list
+            const allHeaders = header.closest('.expandable-list').querySelectorAll('.expandable-header');
+            const allContents = header.closest('.expandable-list').querySelectorAll('.expandable-content');
+            
+            allHeaders.forEach(h => h.classList.remove('active'));
+            allContents.forEach(c => c.classList.remove('active'));
+            
+            // Toggle current item if it wasn't active
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        // Image upload functionality
+        document.getElementById('cover-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const titlePage = document.querySelector('.title-page');
+                    titlePage.style.backgroundImage = `url(${event.target.result})`;
+                    titlePage.style.backgroundSize = 'cover';
+                    titlePage.style.backgroundPosition = 'center';
+                    titlePage.style.backgroundRepeat = 'no-repeat';
+                    
+                    document.getElementById('cover-preview').textContent = `✓ ${file.name}`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('profile-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const profileImage = document.getElementById('profile-image');
+                    const profilePlaceholder = document.getElementById('profile-placeholder');
+                    
+                    profileImage.src = event.target.result;
+                    profileImage.style.display = 'block';
+                    profilePlaceholder.style.display = 'none';
+                    
+                    document.getElementById('profile-preview').textContent = `✓ ${file.name}`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function resetCoverImage() {
+            const titlePage = document.querySelector('.title-page');
+            titlePage.style.backgroundImage = '';
+            titlePage.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #8B0000 100%)';
+            document.getElementById('cover-upload').value = '';
+            document.getElementById('cover-preview').textContent = '';
+        }
+
+        function resetProfileImage() {
+            const profileImage = document.getElementById('profile-image');
+            const profilePlaceholder = document.getElementById('profile-placeholder');
+            
+            profileImage.style.display = 'none';
+            profileImage.src = '';
+            profilePlaceholder.style.display = 'block';
+            
+            document.getElementById('profile-upload').value = '';
+            document.getElementById('profile-preview').textContent = '';
+        }
+
+        // Dynamic year update
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentYear = new Date().getFullYear();
+            const copyrightElements = document.querySelectorAll('.copyright');
+            copyrightElements.forEach(element => {
+                element.innerHTML = element.innerHTML.replace('2025', currentYear);
+            });
+        });
+    </script>
+</body>
+</html>
