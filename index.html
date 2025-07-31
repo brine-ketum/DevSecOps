@@ -1300,6 +1300,111 @@
                 color: #333 !important;
             }
         }
+
+            /* Scoring Guide Mobile Fix - ADD THIS CSS */
+        .scoring-guide-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .scoring-guide-title {
+            color: #1976d2;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .scoring-guide-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            font-size: 14px;
+        }
+        
+        .scoring-section h6 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .scoring-section ul {
+            margin-left: 20px;
+            margin-top: 5px;
+            list-style: none;
+        }
+        
+        .scoring-section li {
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 15px;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .scoring-section strong {
+            margin-right: 8px;
+            min-width: fit-content;
+        }
+        
+        /* Mobile-specific improvements */
+        @media screen and (max-width: 768px) {
+            .scoring-guide-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .scoring-section {
+                margin-bottom: 20px;
+            }
+            
+            .scoring-section li {
+                font-size: 14px;
+                line-height: 1.4;
+                margin-bottom: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .scoring-section strong {
+                margin-right: 0;
+                margin-bottom: 2px;
+                width: 100%;
+            }
+            
+            .scoring-guide-title {
+                font-size: 16px;
+                text-align: center;
+            }
+            
+            .scoring-guide-container {
+                padding: 15px;
+                margin: 15px -10px 20px -10px;
+            }
+        }
+        
+        /* Extra small screens */
+        @media screen and (max-width: 480px) {
+            .scoring-guide-container {
+                margin: 15px -15px 20px -15px;
+                border-radius: 0;
+                padding: 12px;
+            }
+            
+            .scoring-section li {
+                font-size: 13px;
+                padding: 2px 0;
+            }
+            
+            .scoring-guide-title {
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1748,12 +1853,12 @@
                             </div>
                         </div>
                         
-                        <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
-                            <h6 style="color: #1976d2; margin-bottom: 10px;">📊 Scoring Guide:</h6>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 14px;">
-                                <div>
-                                    <strong>Individual Scores:</strong>
-                                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <div class="scoring-guide-container">
+                            <h6 class="scoring-guide-title">📊 Scoring Guide:</h6>
+                            <div class="scoring-guide-content">
+                                <div class="scoring-section">
+                                    <h6>Individual Scores:</h6>
+                                    <ul>
                                         <li><strong>1:</strong> No implementation</li>
                                         <li><strong>2:</strong> Basic awareness</li>
                                         <li><strong>3:</strong> Some implementation</li>
@@ -1761,9 +1866,9 @@
                                         <li><strong>5:</strong> Advanced/Excellent</li>
                                     </ul>
                                 </div>
-                                <div>
-                                    <strong>Maturity Levels:</strong>
-                                    <ul style="margin-left: 20px; margin-top: 5px;">
+                                <div class="scoring-section">
+                                    <h6>Maturity Levels:</h6>
+                                    <ul>
                                         <li><strong>10-20:</strong> 🟡 Basic</li>
                                         <li><strong>21-35:</strong> 🟠 Intermediate</li>
                                         <li><strong>36-45:</strong> 🟢 Advanced</li>
