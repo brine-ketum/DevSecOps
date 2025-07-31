@@ -4358,240 +4358,261 @@
         }
 }
 
-        // AI Security Assessment Calculator
-        function calculateAssessment() {
-            const assessmentInputs = document.querySelectorAll('.assessment-input');
-            let totalWeightedScore = 0;
-            let maxPossibleScore = 0;
-            let componentScores = {};
-            let allFieldsCompleted = true;
+// AI Security Assessment Calculator
+function calculateAssessment() {
+    console.log('Calculate button clicked'); // Debug line
+    
+    const assessmentInputs = document.querySelectorAll('.assessment-input');
+    let totalWeightedScore = 0;
+    let maxPossibleScore = 0;
+    let componentScores = {};
+    let allFieldsCompleted = true;
 
-            // Define weights for each component
-            const weights = {
-                'threat-detection': 1.5,
-                'automation': 1.5,
-                'pipeline-security': 2.0,
-                'code-analysis': 1.0,
-                'access-control': 1.5,
-                'governance': 1.0,
-                'culture': 1.0
-            };
+    // Define weights for each component
+    const weights = {
+        'threat-detection': 1.5,
+        'automation': 1.5,
+        'pipeline-security': 2.0,
+        'code-analysis': 1.0,
+        'access-control': 1.5,
+        'governance': 1.0,
+        'culture': 1.0
+    };
 
-            assessmentInputs.forEach(input => {
-                const component = input.getAttribute('data-component');
-                const score = parseInt(input.value);
-                const weight = weights[component];
+    assessmentInputs.forEach(input => {
+        const component = input.getAttribute('data-component');
+        const score = parseInt(input.value);
+        const weight = weights[component];
 
-                if (score === 0) {
-                    allFieldsCompleted = false;
-                    return;
-                }
+        console.log(`Component: ${component}, Score: ${score}, Weight: ${weight}`); // Debug line
 
-                componentScores[component] = {
-                    score: score,
-                    weightedScore: score * weight,
-                    weight: weight
-                };
-
-                totalWeightedScore += score * weight;
-                maxPossibleScore += 5 * weight;
-            });
-
-            if (!allFieldsCompleted) {
-                showFeedback('❌ Please complete all assessment fields before calculating', 'error');
-                return;
-            }
-
-            // Calculate percentage and determine maturity level
-            const percentage = (totalWeightedScore / maxPossibleScore) * 100;
-            const maturityData = getMaturityLevel(percentage, totalWeightedScore);
-
-            // Display results
-            displayAssessmentResults(totalWeightedScore, maxPossibleScore, percentage, maturityData, componentScores);
-            
-            // Show results section
-            document.getElementById('assessment-results').style.display = 'block';
-            document.getElementById('assessment-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            showFeedback('✅ Assessment completed! Check your results below.', 'success');
+        if (score === 0) {
+            allFieldsCompleted = false;
+            return;
         }
 
-        function getMaturityLevel(percentage, totalScore) {
-            if (totalScore >= 40) {
-                return {
-                    level: '🏆 Expert',
-                    emoji: '🏆',
-                    color: '#9c27b0',
-                    description: 'Outstanding AI security maturity! You are leading the industry in AI-powered security implementation.',
-                    characteristics: [
-                        'Cutting-edge AI security technologies deployed',
-                        'Autonomous threat detection and response',
-                        'Industry thought leadership and innovation',
-                        'Comprehensive AI governance and ethics'
-                    ],
-                    nextSteps: [
-                        'Share knowledge and mentor other organizations',
-                        'Contribute to AI security research and standards',
-                        'Explore quantum-resistant AI security',
-                        'Lead industry transformation initiatives'
-                    ]
-                };
-            } else if (totalScore >= 30) {
-                return {
-                    level: '🟢 Advanced',
-                    emoji: '🟢',
-                    color: '#4caf50',
-                    description: 'Strong AI security maturity with comprehensive implementation across most areas.',
-                    characteristics: [
-                        'Advanced AI security platform deployed',
-                        'Automated incident response workflows',
-                        'Proactive threat hunting capabilities',
-                        'Cross-platform security integration'
-                    ],
-                    nextSteps: [
-                        'Implement autonomous response systems',
-                        'Deploy custom ML security models',
-                        'Establish comprehensive AI governance',
-                        'Build security-by-design culture'
-                    ]
-                };
-            } else if (totalScore >= 20) {
-                return {
-                    level: '🟠 Intermediate',
-                    emoji: '🟠',
-                    color: '#ff9800',
-                    description: 'Good foundation in AI security with room for automation and advanced capabilities.',
-                    characteristics: [
-                        'Basic AI security tools implemented',
-                        'Some automated detection capabilities',
-                        'Improved threat visibility',
-                        'Reduced false positive rates'
-                    ],
-                    nextSteps: [
-                        'Deploy SOAR platform for automation',
-                        'Implement predictive analytics',
-                        'Integrate threat intelligence feeds',
-                        'Develop AI security playbooks'
-                    ]
-                };
-            } else {
-                return {
-                    level: '🟡 Basic',
-                    emoji: '🟡',
-                    color: '#ffc107',
-                    description: 'Early stage in AI security adoption. Significant opportunities for improvement.',
-                    characteristics: [
-                        'Traditional security tools primarily',
-                        'Manual threat detection processes',
-                        'Reactive incident response',
-                        'Limited automation capabilities'
-                    ],
-                    nextSteps: [
-                        'Deploy AI-enhanced SIEM platform',
-                        'Implement ML-based anomaly detection',
-                        'Train security team on AI tools',
-                        'Establish data collection strategy'
-                    ]
-                };
-            }
-        }
+        componentScores[component] = {
+            score: score,
+            weightedScore: score * weight,
+            weight: weight
+        };
 
-        function displayAssessmentResults(totalScore, maxScore, percentage, maturityData, componentScores) {
-            // Update score display
-            document.getElementById('total-score').textContent = Math.round(totalScore) + '/' + maxScore;
-            document.getElementById('maturity-level').innerHTML = maturityData.level;
-            document.getElementById('maturity-level').style.color = maturityData.color;
+        totalWeightedScore += score * weight;
+        maxPossibleScore += 5 * weight;
+    });
 
-            // Update description
-            const descriptionHtml = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 48px; margin-bottom: 15px;">${maturityData.emoji}</div>
-                    <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">${maturityData.description}</p>
-                    <div style="background: ${maturityData.color}20; padding: 15px; border-radius: 8px; border-left: 4px solid ${maturityData.color};">
-                        <h6 style="color: ${maturityData.color}; margin-bottom: 10px;">Current Characteristics:</h6>
-                        <ul style="text-align: left; margin-left: 20px;">
-                            ${maturityData.characteristics.map(char => `<li>${char}</li>`).join('')}
-                        </ul>
-                    </div>
+    console.log(`Total Score: ${totalWeightedScore}, Max Score: ${maxPossibleScore}`); // Debug line
+
+    if (!allFieldsCompleted) {
+        alert('❌ Please complete all assessment fields before calculating');
+        return;
+    }
+
+    // Calculate percentage and determine maturity level
+    const percentage = (totalWeightedScore / maxPossibleScore) * 100;
+    const maturityData = getMaturityLevel(percentage, totalWeightedScore);
+
+    // Display results
+    displayAssessmentResults(totalWeightedScore, maxPossibleScore, percentage, maturityData, componentScores);
+    
+    // Show results section
+    const resultsSection = document.getElementById('assessment-results');
+    if (resultsSection) {
+        resultsSection.style.display = 'block';
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    alert('✅ Assessment completed! Check your results below.');
+}
+
+function getMaturityLevel(percentage, totalScore) {
+    if (totalScore >= 40) {
+        return {
+            level: '🏆 Expert',
+            emoji: '🏆',
+            color: '#9c27b0',
+            description: 'Outstanding AI security maturity! You are leading the industry in AI-powered security implementation.',
+            characteristics: [
+                'Cutting-edge AI security technologies deployed',
+                'Autonomous threat detection and response',
+                'Industry thought leadership and innovation',
+                'Comprehensive AI governance and ethics'
+            ],
+            nextSteps: [
+                'Share knowledge and mentor other organizations',
+                'Contribute to AI security research and standards',
+                'Explore quantum-resistant AI security',
+                'Lead industry transformation initiatives'
+            ]
+        };
+    } else if (totalScore >= 30) {
+        return {
+            level: '🟢 Advanced',
+            emoji: '🟢',
+            color: '#4caf50',
+            description: 'Strong AI security maturity with comprehensive implementation across most areas.',
+            characteristics: [
+                'Advanced AI security platform deployed',
+                'Automated incident response workflows',
+                'Proactive threat hunting capabilities',
+                'Cross-platform security integration'
+            ],
+            nextSteps: [
+                'Implement autonomous response systems',
+                'Deploy custom ML security models',
+                'Establish comprehensive AI governance',
+                'Build security-by-design culture'
+            ]
+        };
+    } else if (totalScore >= 20) {
+        return {
+            level: '🟠 Intermediate',
+            emoji: '🟠',
+            color: '#ff9800',
+            description: 'Good foundation in AI security with room for automation and advanced capabilities.',
+            characteristics: [
+                'Basic AI security tools implemented',
+                'Some automated detection capabilities',
+                'Improved threat visibility',
+                'Reduced false positive rates'
+            ],
+            nextSteps: [
+                'Deploy SOAR platform for automation',
+                'Implement predictive analytics',
+                'Integrate threat intelligence feeds',
+                'Develop AI security playbooks'
+            ]
+        };
+    } else {
+        return {
+            level: '🟡 Basic',
+            emoji: '🟡',
+            color: '#ffc107',
+            description: 'Early stage in AI security adoption. Significant opportunities for improvement.',
+            characteristics: [
+                'Traditional security tools primarily',
+                'Manual threat detection processes',
+                'Reactive incident response',
+                'Limited automation capabilities'
+            ],
+            nextSteps: [
+                'Deploy AI-enhanced SIEM platform',
+                'Implement ML-based anomaly detection',
+                'Train security team on AI tools',
+                'Establish data collection strategy'
+            ]
+        };
+    }
+}
+
+function displayAssessmentResults(totalScore, maxScore, percentage, maturityData, componentScores) {
+    // Update score display
+    const totalScoreElement = document.getElementById('total-score');
+    const maturityLevelElement = document.getElementById('maturity-level');
+    
+    if (totalScoreElement) {
+        totalScoreElement.textContent = Math.round(totalScore) + '/' + maxScore;
+    }
+    
+    if (maturityLevelElement) {
+        maturityLevelElement.innerHTML = maturityData.level;
+        maturityLevelElement.style.color = maturityData.color;
+    }
+
+    // Update description
+    const descriptionHtml = `
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 48px; margin-bottom: 15px;">${maturityData.emoji}</div>
+            <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">${maturityData.description}</p>
+            <div style="background: ${maturityData.color}20; padding: 15px; border-radius: 8px; border-left: 4px solid ${maturityData.color};">
+                <h6 style="color: ${maturityData.color}; margin-bottom: 10px;">Current Characteristics:</h6>
+                <ul style="text-align: left; margin-left: 20px;">
+                    ${maturityData.characteristics.map(char => `<li>${char}</li>`).join('')}
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    const descriptionElement = document.getElementById('maturity-description');
+    if (descriptionElement) {
+        descriptionElement.innerHTML = descriptionHtml;
+    }
+
+    // Update recommendations
+    const recommendationsHtml = maturityData.nextSteps.map(step => `<li>${step}</li>`).join('');
+    const recommendationsList = document.getElementById('recommendation-list');
+    if (recommendationsList) {
+        recommendationsList.innerHTML = recommendationsHtml;
+    }
+
+    // Create gap analysis
+    createGapAnalysis(componentScores);
+}
+
+function createGapAnalysis(componentScores) {
+    const componentNames = {
+        'threat-detection': 'ML-Based Threat Detection',
+        'automation': 'AI Security Automation',
+        'pipeline-security': 'AI/ML Pipeline Security',
+        'code-analysis': 'Code Security Analysis',
+        'access-control': 'Intelligent Access Control',
+        'governance': 'AI Governance & Compliance',
+        'culture': 'Security Culture & Training'
+    };
+
+    let gapHtml = '<div style="display: grid; grid-template-columns: 1fr; gap: 10px;">';
+    
+    Object.keys(componentScores).forEach(component => {
+        const data = componentScores[component];
+        const percentage = (data.score / 5) * 100;
+        const name = componentNames[component];
+        
+        let barColor = '#4caf50';
+        if (percentage < 40) barColor = '#f44336';
+        else if (percentage < 60) barColor = '#ff9800';
+        else if (percentage < 80) barColor = '#2196f3';
+        
+        gapHtml += `
+            <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span style="font-weight: 600; font-size: 14px;">${name}</span>
+                    <span style="font-weight: 600; color: ${barColor};">${data.score}/5</span>
                 </div>
-            `;
-            document.getElementById('maturity-description').innerHTML = descriptionHtml;
+                <div style="background: #e0e0e0; height: 12px; border-radius: 6px; overflow: hidden;">
+                    <div style="background: ${barColor}; height: 100%; width: ${percentage}%; transition: width 0.5s ease;"></div>
+                </div>
+                <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                    Weight: ×${data.weight} | Weighted Score: ${data.weightedScore}
+                </div>
+            </div>
+        `;
+    });
+    
+    gapHtml += '</div>';
+    
+    const gapChartsElement = document.getElementById('gap-charts');
+    if (gapChartsElement) {
+        gapChartsElement.innerHTML = gapHtml;
+    }
+}
 
-            // Update recommendations
-            const recommendationsHtml = maturityData.nextSteps.map(step => `<li>${step}</li>`).join('');
-            document.getElementById('recommendation-list').innerHTML = recommendationsHtml;
+function resetAssessment() {
+    console.log('Reset button clicked'); // Debug line
+    
+    // Reset all dropdowns
+    const assessmentInputs = document.querySelectorAll('.assessment-input');
+    assessmentInputs.forEach(input => {
+        input.value = '0';
+    });
 
-            // Create gap analysis
-            createGapAnalysis(componentScores);
-        }
-
-        function createGapAnalysis(componentScores) {
-            const componentNames = {
-                'threat-detection': 'ML-Based Threat Detection',
-                'automation': 'AI Security Automation',
-                'pipeline-security': 'AI/ML Pipeline Security',
-                'code-analysis': 'Code Security Analysis',
-                'access-control': 'Intelligent Access Control',
-                'governance': 'AI Governance & Compliance',
-                'culture': 'Security Culture & Training'
-            };
-
-            let gapHtml = '<div style="display: grid; grid-template-columns: 1fr; gap: 10px;">';
-            
-            Object.keys(componentScores).forEach(component => {
-                const data = componentScores[component];
-                const percentage = (data.score / 5) * 100;
-                const name = componentNames[component];
-                
-                let barColor = '#4caf50';
-                if (percentage < 40) barColor = '#f44336';
-                else if (percentage < 60) barColor = '#ff9800';
-                else if (percentage < 80) barColor = '#2196f3';
-                
-                gapHtml += `
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span style="font-weight: 600; font-size: 14px;">${name}</span>
-                            <span style="font-weight: 600; color: ${barColor};">${data.score}/5</span>
-                        </div>
-                        <div style="background: #e0e0e0; height: 12px; border-radius: 6px; overflow: hidden;">
-                            <div style="background: ${barColor}; height: 100%; width: ${percentage}%; transition: width 0.5s ease;"></div>
-                        </div>
-                        <div style="font-size: 12px; color: #666; margin-top: 3px;">
-                            Weight: ×${data.weight} | Weighted Score: ${data.weightedScore}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            gapHtml += '</div>';
-            document.getElementById('gap-charts').innerHTML = gapHtml;
-        }
-
-        function resetAssessment() {
-            // Reset all dropdowns
-            const assessmentInputs = document.querySelectorAll('.assessment-input');
-            assessmentInputs.forEach(input => {
-                input.value = '0';
-            });
-
-            // Hide results
-            document.getElementById('assessment-results').style.display = 'none';
-            
-            showFeedback('🔄 Assessment reset. You can now start over.', 'info');
-        }
-
-        // Dynamic year update
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentYear = new Date().getFullYear();
-            const copyrightElements = document.querySelectorAll('.copyright');
-            copyrightElements.forEach(element => {
-                element.innerHTML = element.innerHTML.replace('2025', currentYear);
-            });
-        });
-    </script>
-</body>
-</html>
+    // Hide results
+    const resultsSection = document.getElementById('assessment-results');
+    if (resultsSection) {
+        resultsSection.style.display = 'none';
+    }
+    
+    alert('🔄 Assessment reset. You can now start over.');
+}
         // Dynamic year update
         document.addEventListener('DOMContentLoaded', function() {
             const currentYear = new Date().getFullYear();
