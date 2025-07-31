@@ -1706,8 +1706,8 @@
                         <button onclick="calculateAssessment()" style="background: linear-gradient(135deg, #FF6B6B, #DC143C); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); transition: all 0.3s ease;">
                             🧮 Calculate My AI Security Maturity
                         </button>
-                        <button onclick="resetAssessment()" style="background: #666; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 15px; transition: all 0.3s ease;">
-                            🔄 Reset
+                        <button onclick="testButtons()" style="background: linear-gradient(135deg, #FF6B6B, #DC143C); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer;">
+                            🧮 Test Button
                         </button>
                     </div>
                 </div>
@@ -4358,6 +4358,11 @@
         }
 }
 
+        // Test function
+        function testButtons() {
+            alert('JavaScript is working!');
+            console.log('Test function called');
+        }
 // AI Security Assessment Calculator
 function calculateAssessment() {
     console.log('Calculate button clicked'); // Debug line
