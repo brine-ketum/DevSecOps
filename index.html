@@ -1586,66 +1586,192 @@
                         💡 Score each area from 1-5 (1=Basic, 5=Advanced) to identify improvement opportunities!
                     </div>
                     
-                    <div style="background: white; padding: 25px; border-radius: 10px; margin: 20px 0;">
-                        <table style="width: 100%; margin: 0;">
-                            <tr style="background: #FF6B6B; color: white;">
-                                <th style="padding: 15px; text-align: left; width: 60%;">AI Security Component</th>
-                                <th style="padding: 15px; text-align: center; width: 20%;">Current Score (1-5)</th>
-                                <th style="padding: 15px; text-align: center; width: 20%;">Priority Level</th>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px;"><strong>ML-Based Threat Detection</strong><br><small>Behavioral analytics, anomaly detection</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">High</td>
-                            </tr>
-                            <tr style="background: #f9f9f9;">
-                                <td style="padding: 12px;"><strong>AI Security Automation</strong><br><small>SOAR, automated response, playbooks</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">High</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px;"><strong>AI/ML Pipeline Security</strong><br><small>Model protection, adversarial defense</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">Critical</td>
-                            </tr>
-                            <tr style="background: #f9f9f9;">
-                                <td style="padding: 12px;"><strong>Code Security Analysis</strong><br><small>AI-powered SAST, vulnerability scanning</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">Medium</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px;"><strong>Intelligent Access Control</strong><br><small>Zero trust, behavioral authentication</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">High</td>
-                            </tr>
-                            <tr style="background: #f9f9f9;">
-                                <td style="padding: 12px;"><strong>AI Governance & Compliance</strong><br><small>Model monitoring, explainability, ethics</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">Medium</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px;"><strong>Security Culture & Training</strong><br><small>AI security awareness, skills development</small></td>
-                                <td style="padding: 12px; text-align: center; border: 1px solid #ddd;">[ ]</td>
-                                <td style="padding: 12px; text-align: center;">Medium</td>
-                            </tr>
-                            <tr style="background: #4caf50; color: white;">
-                                <td style="padding: 15px; font-weight: bold;">TOTAL SCORE</td>
-                                <td style="padding: 15px; text-align: center; font-weight: bold;">___/35</td>
-                                <td style="padding: 15px; text-align: center; font-weight: bold;">Maturity Level</td>
-                            </tr>
-                        </table>
-                        
-                        <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
-                            <h6 style="color: #1976d2; margin-bottom: 10px;">📊 Maturity Levels:</h6>
-                            <ul style="font-size: 14px; margin-left: 20px;">
-                                <li><strong>7-14 points:</strong> 🟡 Basic - Start with foundational AI security tools</li>
-                                <li><strong>15-24 points:</strong> 🟠 Intermediate - Focus on automation and integration</li>
-                                <li><strong>25-30 points:</strong> 🟢 Advanced - Implement cutting-edge AI security</li>
-                                <li><strong>31-35 points:</strong> 🏆 Expert - Lead industry transformation</li>
+            <div style="background: white; padding: 25px; border-radius: 10px; margin: 20px 0;">
+                <div id="assessment-form">
+                    <table style="width: 100%; margin: 0;">
+                        <tr style="background: #FF6B6B; color: white;">
+                            <th style="padding: 15px; text-align: left; width: 50%;">AI Security Component</th>
+                            <th style="padding: 15px; text-align: center; width: 25%;">Current Score (1-5)</th>
+                            <th style="padding: 15px; text-align: center; width: 15%;">Priority</th>
+                            <th style="padding: 15px; text-align: center; width: 10%;">Weight</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;"><strong>ML-Based Threat Detection</strong><br><small>Behavioral analytics, anomaly detection</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="threat-detection" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #d32f2f; font-weight: bold;">High</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×1.5</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 12px;"><strong>AI Security Automation</strong><br><small>SOAR, automated response, playbooks</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="automation" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #d32f2f; font-weight: bold;">High</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×1.5</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;"><strong>AI/ML Pipeline Security</strong><br><small>Model protection, adversarial defense</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="pipeline-security" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #b71c1c; font-weight: bold;">Critical</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×2.0</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 12px;"><strong>Code Security Analysis</strong><br><small>AI-powered SAST, vulnerability scanning</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="code-analysis" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #f57c00; font-weight: bold;">Medium</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×1.0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;"><strong>Intelligent Access Control</strong><br><small>Zero trust, behavioral authentication</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="access-control" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #d32f2f; font-weight: bold;">High</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×1.5</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 12px;"><strong>AI Governance & Compliance</strong><br><small>Model monitoring, explainability, ethics</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="governance" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #f57c00; font-weight: bold;">Medium</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×1.0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;"><strong>Security Culture & Training</strong><br><small>AI security awareness, skills development</small></td>
+                            <td style="padding: 12px; text-align: center;">
+                                <select class="assessment-input" data-component="culture" style="width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;">
+                                    <option value="0">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="padding: 12px; text-align: center; color: #f57c00; font-weight: bold;">Medium</td>
+                            <td style="padding: 12px; text-align: center; font-size: 14px;">×1.0</td>
+                        </tr>
+                    </table>
+                    
+                    <div style="margin-top: 25px; text-align: center;">
+                        <button onclick="calculateAssessment()" style="background: linear-gradient(135deg, #FF6B6B, #DC143C); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); transition: all 0.3s ease;">
+                            🧮 Calculate My AI Security Maturity
+                        </button>
+                        <button onclick="resetAssessment()" style="background: #666; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 15px; transition: all 0.3s ease;">
+                            🔄 Reset
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Section (Initially Hidden) -->
+                <div id="assessment-results" style="display: none; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 10px; border-left: 5px solid #28a745;">
+                    <h4 style="color: #28a745; margin-bottom: 20px; text-align: center;">🎯 Your AI Security Maturity Results</h4>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                        <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div id="total-score" style="font-size: 36px; font-weight: bold; color: #FF6B6B; margin-bottom: 10px;">-</div>
+                            <div style="font-size: 14px; color: #666;">Weighted Score</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div id="maturity-level" style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">-</div>
+                            <div style="font-size: 14px; color: #666;">Maturity Level</div>
+                        </div>
+                    </div>
+                    
+                    <div id="maturity-description" style="padding: 20px; background: white; border-radius: 8px; margin-bottom: 20px;">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                    
+                    <div id="recommendations" style="padding: 20px; background: white; border-radius: 8px; margin-bottom: 20px;">
+                        <h5 style="color: #FF6B6B; margin-bottom: 15px;">🚀 Recommended Next Steps</h5>
+                        <ul id="recommendation-list" style="font-size: 16px; line-height: 1.6;">
+                            <!-- Dynamic recommendations will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <div id="gap-analysis" style="padding: 20px; background: white; border-radius: 8px;">
+                        <h5 style="color: #FF6B6B; margin-bottom: 15px;">📊 Gap Analysis</h5>
+                        <div id="gap-charts">
+                            <!-- Dynamic gap analysis will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                    <h6 style="color: #1976d2; margin-bottom: 10px;">📊 Scoring Guide:</h6>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 14px;">
+                        <div>
+                            <strong>Individual Scores:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>1:</strong> No implementation</li>
+                                <li><strong>2:</strong> Basic awareness</li>
+                                <li><strong>3:</strong> Some implementation</li>
+                                <li><strong>4:</strong> Good implementation</li>
+                                <li><strong>5:</strong> Advanced/Excellent</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>Maturity Levels:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>10-20:</strong> 🟡 Basic</li>
+                                <li><strong>21-35:</strong> 🟠 Intermediate</li>
+                                <li><strong>36-45:</strong> 🟢 Advanced</li>
+                                <li><strong>46-50:</strong> 🏆 Expert</li>
                             </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+                            </div>
             </div>
             
             <div class="section">
@@ -4230,7 +4356,242 @@
             document.getElementById('profile-base64-input').value = '';
             showFeedback('Profile image reset to default', 'info');
         }
+}
 
+        // AI Security Assessment Calculator
+        function calculateAssessment() {
+            const assessmentInputs = document.querySelectorAll('.assessment-input');
+            let totalWeightedScore = 0;
+            let maxPossibleScore = 0;
+            let componentScores = {};
+            let allFieldsCompleted = true;
+
+            // Define weights for each component
+            const weights = {
+                'threat-detection': 1.5,
+                'automation': 1.5,
+                'pipeline-security': 2.0,
+                'code-analysis': 1.0,
+                'access-control': 1.5,
+                'governance': 1.0,
+                'culture': 1.0
+            };
+
+            assessmentInputs.forEach(input => {
+                const component = input.getAttribute('data-component');
+                const score = parseInt(input.value);
+                const weight = weights[component];
+
+                if (score === 0) {
+                    allFieldsCompleted = false;
+                    return;
+                }
+
+                componentScores[component] = {
+                    score: score,
+                    weightedScore: score * weight,
+                    weight: weight
+                };
+
+                totalWeightedScore += score * weight;
+                maxPossibleScore += 5 * weight;
+            });
+
+            if (!allFieldsCompleted) {
+                showFeedback('❌ Please complete all assessment fields before calculating', 'error');
+                return;
+            }
+
+            // Calculate percentage and determine maturity level
+            const percentage = (totalWeightedScore / maxPossibleScore) * 100;
+            const maturityData = getMaturityLevel(percentage, totalWeightedScore);
+
+            // Display results
+            displayAssessmentResults(totalWeightedScore, maxPossibleScore, percentage, maturityData, componentScores);
+            
+            // Show results section
+            document.getElementById('assessment-results').style.display = 'block';
+            document.getElementById('assessment-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            showFeedback('✅ Assessment completed! Check your results below.', 'success');
+        }
+
+        function getMaturityLevel(percentage, totalScore) {
+            if (totalScore >= 40) {
+                return {
+                    level: '🏆 Expert',
+                    emoji: '🏆',
+                    color: '#9c27b0',
+                    description: 'Outstanding AI security maturity! You are leading the industry in AI-powered security implementation.',
+                    characteristics: [
+                        'Cutting-edge AI security technologies deployed',
+                        'Autonomous threat detection and response',
+                        'Industry thought leadership and innovation',
+                        'Comprehensive AI governance and ethics'
+                    ],
+                    nextSteps: [
+                        'Share knowledge and mentor other organizations',
+                        'Contribute to AI security research and standards',
+                        'Explore quantum-resistant AI security',
+                        'Lead industry transformation initiatives'
+                    ]
+                };
+            } else if (totalScore >= 30) {
+                return {
+                    level: '🟢 Advanced',
+                    emoji: '🟢',
+                    color: '#4caf50',
+                    description: 'Strong AI security maturity with comprehensive implementation across most areas.',
+                    characteristics: [
+                        'Advanced AI security platform deployed',
+                        'Automated incident response workflows',
+                        'Proactive threat hunting capabilities',
+                        'Cross-platform security integration'
+                    ],
+                    nextSteps: [
+                        'Implement autonomous response systems',
+                        'Deploy custom ML security models',
+                        'Establish comprehensive AI governance',
+                        'Build security-by-design culture'
+                    ]
+                };
+            } else if (totalScore >= 20) {
+                return {
+                    level: '🟠 Intermediate',
+                    emoji: '🟠',
+                    color: '#ff9800',
+                    description: 'Good foundation in AI security with room for automation and advanced capabilities.',
+                    characteristics: [
+                        'Basic AI security tools implemented',
+                        'Some automated detection capabilities',
+                        'Improved threat visibility',
+                        'Reduced false positive rates'
+                    ],
+                    nextSteps: [
+                        'Deploy SOAR platform for automation',
+                        'Implement predictive analytics',
+                        'Integrate threat intelligence feeds',
+                        'Develop AI security playbooks'
+                    ]
+                };
+            } else {
+                return {
+                    level: '🟡 Basic',
+                    emoji: '🟡',
+                    color: '#ffc107',
+                    description: 'Early stage in AI security adoption. Significant opportunities for improvement.',
+                    characteristics: [
+                        'Traditional security tools primarily',
+                        'Manual threat detection processes',
+                        'Reactive incident response',
+                        'Limited automation capabilities'
+                    ],
+                    nextSteps: [
+                        'Deploy AI-enhanced SIEM platform',
+                        'Implement ML-based anomaly detection',
+                        'Train security team on AI tools',
+                        'Establish data collection strategy'
+                    ]
+                };
+            }
+        }
+
+        function displayAssessmentResults(totalScore, maxScore, percentage, maturityData, componentScores) {
+            // Update score display
+            document.getElementById('total-score').textContent = Math.round(totalScore) + '/' + maxScore;
+            document.getElementById('maturity-level').innerHTML = maturityData.level;
+            document.getElementById('maturity-level').style.color = maturityData.color;
+
+            // Update description
+            const descriptionHtml = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">${maturityData.emoji}</div>
+                    <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">${maturityData.description}</p>
+                    <div style="background: ${maturityData.color}20; padding: 15px; border-radius: 8px; border-left: 4px solid ${maturityData.color};">
+                        <h6 style="color: ${maturityData.color}; margin-bottom: 10px;">Current Characteristics:</h6>
+                        <ul style="text-align: left; margin-left: 20px;">
+                            ${maturityData.characteristics.map(char => `<li>${char}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            document.getElementById('maturity-description').innerHTML = descriptionHtml;
+
+            // Update recommendations
+            const recommendationsHtml = maturityData.nextSteps.map(step => `<li>${step}</li>`).join('');
+            document.getElementById('recommendation-list').innerHTML = recommendationsHtml;
+
+            // Create gap analysis
+            createGapAnalysis(componentScores);
+        }
+
+        function createGapAnalysis(componentScores) {
+            const componentNames = {
+                'threat-detection': 'ML-Based Threat Detection',
+                'automation': 'AI Security Automation',
+                'pipeline-security': 'AI/ML Pipeline Security',
+                'code-analysis': 'Code Security Analysis',
+                'access-control': 'Intelligent Access Control',
+                'governance': 'AI Governance & Compliance',
+                'culture': 'Security Culture & Training'
+            };
+
+            let gapHtml = '<div style="display: grid; grid-template-columns: 1fr; gap: 10px;">';
+            
+            Object.keys(componentScores).forEach(component => {
+                const data = componentScores[component];
+                const percentage = (data.score / 5) * 100;
+                const name = componentNames[component];
+                
+                let barColor = '#4caf50';
+                if (percentage < 40) barColor = '#f44336';
+                else if (percentage < 60) barColor = '#ff9800';
+                else if (percentage < 80) barColor = '#2196f3';
+                
+                gapHtml += `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-weight: 600; font-size: 14px;">${name}</span>
+                            <span style="font-weight: 600; color: ${barColor};">${data.score}/5</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 12px; border-radius: 6px; overflow: hidden;">
+                            <div style="background: ${barColor}; height: 100%; width: ${percentage}%; transition: width 0.5s ease;"></div>
+                        </div>
+                        <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                            Weight: ×${data.weight} | Weighted Score: ${data.weightedScore}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            gapHtml += '</div>';
+            document.getElementById('gap-charts').innerHTML = gapHtml;
+        }
+
+        function resetAssessment() {
+            // Reset all dropdowns
+            const assessmentInputs = document.querySelectorAll('.assessment-input');
+            assessmentInputs.forEach(input => {
+                input.value = '0';
+            });
+
+            // Hide results
+            document.getElementById('assessment-results').style.display = 'none';
+            
+            showFeedback('🔄 Assessment reset. You can now start over.', 'info');
+        }
+
+        // Dynamic year update
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentYear = new Date().getFullYear();
+            const copyrightElements = document.querySelectorAll('.copyright');
+            copyrightElements.forEach(element => {
+                element.innerHTML = element.innerHTML.replace('2025', currentYear);
+            });
+        });
+    </script>
+</body>
+</html>
         // Dynamic year update
         document.addEventListener('DOMContentLoaded', function() {
             const currentYear = new Date().getFullYear();
