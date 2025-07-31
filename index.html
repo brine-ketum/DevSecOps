@@ -1706,8 +1706,11 @@
                         <button onclick="calculateAssessment()" style="background: linear-gradient(135deg, #FF6B6B, #DC143C); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); transition: all 0.3s ease;">
                             🧮 Calculate My AI Security Maturity
                         </button>
-                        <button onclick="testButtons()" style="background: linear-gradient(135deg, #FF6B6B, #DC143C); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer;">
-                            🧮 Test Button
+                        <button onclick="resetAssessment()" style="background: #666; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 15px; transition: all 0.3s ease;">
+                            🔄 Reset
+                        </button>
+                        <button onclick="testFunction()" style="background: red; color: white; padding: 10px; margin: 20px;">
+                            TEST BUTTON - CLICK ME
                         </button>
                     </div>
                 </div>
@@ -4101,273 +4104,97 @@
         </div>
     </div>
 
-    <script>
-        function showTab(tabName) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-            
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('.tab-button');
-            buttons.forEach(button => button.classList.remove('active'));
-            
-            // Show selected tab
-            const selectedTab = document.getElementById(tabName);
-            if (selectedTab) {
-                selectedTab.classList.add('active');
-            }
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
-        
-        // Smooth scrolling for table of contents links
-        document.querySelectorAll('.toc-item a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
 
-        // Add fade-in animation to sections on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections for animation
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(section);
-        });
-
-        // Expandable sections functionality
-        function toggleExpandable(header) {
-            const content = header.nextElementSibling;
-            const isActive = header.classList.contains('active');
-            
-            // Close all other expandable items in the same list
-            const allHeaders = header.closest('.expandable-list').querySelectorAll('.expandable-header');
-            const allContents = header.closest('.expandable-list').querySelectorAll('.expandable-content');
-            
-            allHeaders.forEach(h => h.classList.remove('active'));
-            allContents.forEach(c => c.classList.remove('active'));
-            
-            // Toggle current item if it wasn't active
-            if (!isActive) {
-                header.classList.add('active');
-                content.classList.add('active');
-            }
-        }
-
-        // Base64 image functionality
-        function applyCoverBase64() {
-            const base64Input = document.getElementById('cover-base64-input').value.trim();
-            if (base64Input) {
-                if (base64Input.startsWith('data:image/')) {
-                    const titlePage = document.querySelector('.title-page');
-                    titlePage.style.backgroundImage = `url(${base64Input})`;
-                    titlePage.style.backgroundSize = 'cover';
-                    titlePage.style.backgroundPosition = 'center';
-                    titlePage.style.backgroundRepeat = 'no-repeat';
-                    
-                    // Show success feedback
-                    showFeedback('✓ Cover background applied successfully!', 'success');
-                } else {
-                    showFeedback('❌ Please paste a valid Base64 image string starting with "data:image/"', 'error');
-                }
-            } else {
-                showFeedback('❌ Please paste a Base64 image string first', 'error');
-            }
-        }
-
-        function clearCoverBase64() {
-            document.getElementById('cover-base64-input').value = '';
-            showFeedback('Base64 input cleared', 'info');
-        }
-
-        function applyProfileBase64() {
-            const base64Input = document.getElementById('profile-base64-input').value.trim();
-            if (base64Input) {
-                if (base64Input.startsWith('data:image/')) {
-                    const profileImage = document.getElementById('profile-image');
-                    const profilePlaceholder = document.getElementById('profile-placeholder');
-                    
-                    profileImage.src = base64Input;
-                    profileImage.style.display = 'block';
-                    profilePlaceholder.style.display = 'none';
-                    
-                    // Show success feedback
-                    showFeedback('✓ Profile picture applied successfully!', 'success');
-                } else {
-                    showFeedback('❌ Please paste a valid Base64 image string starting with "data:image/"', 'error');
-                }
-            } else {
-                showFeedback('❌ Please paste a Base64 image string first', 'error');
-            }
-        }
-
-        function clearProfileBase64() {
-            document.getElementById('profile-base64-input').value = '';
-            showFeedback('Base64 input cleared', 'info');
-        }
-
-        function showFeedback(message, type) {
-            // Remove existing feedback
-            const existingFeedback = document.querySelector('.feedback-message');
-            if (existingFeedback) {
-                existingFeedback.remove();
-            }
-
-            // Create new feedback message
-            const feedback = document.createElement('div');
-            feedback.className = 'feedback-message';
-            feedback.textContent = message;
-            
-            // Style based on type
-            const colors = {
-                success: '#10B981',
-                error: '#EF4444',
-                info: '#3B82F6'
-            };
-            
-            feedback.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: ${colors[type] || colors.info};
-                color: white;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 600;
-                z-index: 10000;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                animation: slideDown 0.3s ease-out;
-            `;
-
-            document.body.appendChild(feedback);
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                if (feedback.parentNode) {
-                    feedback.style.animation = 'slideUp 0.3s ease-out';
-                    setTimeout(() => feedback.remove(), 300);
-                }
-            }, 3000);
-        }
-
-        // Add CSS for feedback animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideDown {
-                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-                to { transform: translateX(-50%) translateY(0); opacity: 1; }
-            }
-            @keyframes slideUp {
-                from { transform: translateX(-50%) translateY(0); opacity: 1; }
-                to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Enhanced image upload functionality
-        // Enhanced image upload functionality
-        document.getElementById('cover-upload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const titlePage = document.querySelector('.title-page');
-                    titlePage.style.backgroundImage = `url(${event.target.result})`;
-                    titlePage.style.backgroundSize = 'cover';
-                    titlePage.style.backgroundPosition = 'center';
-                    titlePage.style.backgroundRepeat = 'no-repeat';
-                    
-                    document.getElementById('cover-preview').textContent = `✓ ${file.name}`;
-                    
-                    // Also update Base64 textarea for reference
-                    document.getElementById('cover-base64-input').value = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('profile-upload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const profileImage = document.getElementById('profile-image');
-                    const profilePlaceholder = document.getElementById('profile-placeholder');
-                    
-                    profileImage.src = event.target.result;
-                    profileImage.style.display = 'block';
-                    profilePlaceholder.style.display = 'none';
-                    
-                    document.getElementById('profile-preview').textContent = `✓ ${file.name}`;
-                    
-                    // Also update Base64 textarea for reference
-                    document.getElementById('profile-base64-input').value = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function resetCoverImage() {
-            const titlePage = document.querySelector('.title-page');
-            titlePage.style.backgroundImage = '';
-            titlePage.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #8B0000 100%)';
-            document.getElementById('cover-upload').value = '';
-            document.getElementById('cover-preview').textContent = '';
-            document.getElementById('cover-base64-input').value = '';
-            showFeedback('Cover image reset to default', 'info');
-        }
-
-        function resetProfileImage() {
-            const profileImage = document.getElementById('profile-image');
-            const profilePlaceholder = document.getElementById('profile-placeholder');
-            
-            profileImage.style.display = 'none';
-            profileImage.src = '';
-            profilePlaceholder.style.display = 'block';
-            
-            document.getElementById('profile-upload').value = '';
-            document.getElementById('profile-preview').textContent = '';
-            document.getElementById('profile-base64-input').value = '';
-            showFeedback('Profile image reset to default', 'info');
-        }
+   <script>
+function showTab(tabName) {
+    // Hide all tab contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+    
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.tab-button');
+    buttons.forEach(button => button.classList.remove('active'));
+    
+    // Show selected tab
+    const selectedTab = document.getElementById(tabName);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
 }
 
-        // Test function
-        function testButtons() {
-            alert('JavaScript is working!');
-            console.log('Test function called');
+// Smooth scrolling for table of contents links
+document.querySelectorAll('.toc-item a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
+    });
+});
+
+// Add fade-in animation to sections on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe all sections for animation
+document.querySelectorAll('.section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+    observer.observe(section);
+});
+
+// Expandable sections functionality
+function toggleExpandable(header) {
+    const content = header.nextElementSibling;
+    const isActive = header.classList.contains('active');
+    
+    // Close all other expandable items in the same list
+    const allHeaders = header.closest('.expandable-list').querySelectorAll('.expandable-header');
+    const allContents = header.closest('.expandable-list').querySelectorAll('.expandable-content');
+    
+    allHeaders.forEach(h => h.classList.remove('active'));
+    allContents.forEach(c => c.classList.remove('active'));
+    
+    // Toggle current item if it wasn't active
+    if (!isActive) {
+        header.classList.add('active');
+        content.classList.add('active');
+    }
+}
+
 // AI Security Assessment Calculator
 function calculateAssessment() {
+    alert('Calculate button clicked!'); // Test alert
     console.log('Calculate button clicked'); // Debug line
     
     const assessmentInputs = document.querySelectorAll('.assessment-input');
+    console.log('Found inputs:', assessmentInputs.length); // Debug
+    
+    if (assessmentInputs.length === 0) {
+        alert('❌ No assessment inputs found! Check HTML structure.');
+        return;
+    }
+    
     let totalWeightedScore = 0;
     let maxPossibleScore = 0;
     let componentScores = {};
@@ -4602,6 +4429,7 @@ function createGapAnalysis(componentScores) {
 }
 
 function resetAssessment() {
+    alert('Reset button clicked!'); // Test alert
     console.log('Reset button clicked'); // Debug line
     
     // Reset all dropdowns
@@ -4618,14 +4446,19 @@ function resetAssessment() {
     
     alert('🔄 Assessment reset. You can now start over.');
 }
-        // Dynamic year update
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentYear = new Date().getFullYear();
-            const copyrightElements = document.querySelectorAll('.copyright');
-            copyrightElements.forEach(element => {
-                element.innerHTML = element.innerHTML.replace('2025', currentYear);
-            });
-        });
-    </script>
-</body>
-</html>
+
+// Test function
+function testFunction() {
+    alert('JavaScript is working!');
+    console.log('Test function called');
+}
+
+// Dynamic year update
+document.addEventListener('DOMContentLoaded', function() {
+    const currentYear = new Date().getFullYear();
+    const copyrightElements = document.querySelectorAll('.copyright');
+    copyrightElements.forEach(element => {
+        element.innerHTML = element.innerHTML.replace('2025', currentYear);
+    });
+});
+</script>
