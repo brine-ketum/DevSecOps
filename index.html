@@ -652,7 +652,7 @@
 
         .expandable-content.active {
             padding: 20px;
-            max-height: 500px;
+            max-height: 800px; /* Increased for mobile content */
         }
 
         .expandable-content h5 {
@@ -688,12 +688,15 @@
         .expandable-resource-link {
             background: linear-gradient(135deg, #FF6B6B, #DC143C);
             color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: inline-block;
+            margin: 3px;
+            white-space: nowrap;
         }
 
         .expandable-resource-link:hover {
@@ -720,6 +723,58 @@
             0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        /* Mobile-specific improvements for expandable content */
+        @media screen and (max-width: 768px) {
+            .expandable-header {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+
+            .expandable-content.active {
+                max-height: 1000px; /* Even more space for mobile */
+                padding: 15px;
+            }
+
+            .expandable-resources {
+                flex-direction: column;
+                gap: 8px;
+                align-items: stretch;
+            }
+
+            .expandable-resource-link {
+                width: 100%;
+                text-align: center;
+                padding: 12px 16px;
+                font-size: 16px;
+                border-radius: 8px;
+                margin: 0;
+                white-space: normal;
+                min-height: 44px; /* Better touch target */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .expandable-content h5 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .expandable-content p {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .expandable-content ul {
+                margin-left: 15px;
+            }
+
+            .expandable-content li {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
         }
 
         /* ===== TABLE OF CONTENTS ===== */
@@ -1252,7 +1307,7 @@
         <!-- Title Page -->
         <div class="title-page">
             <h1 class="book-title">
-                MASTERING AI POWERED<br>
+                MASTERING AI-POWERED<br>
                 <span style="margin-top: 15px; display: inline-block;">DEVSECOPS</span>
             </h1>
             
@@ -1490,6 +1545,9 @@
                 
                 <div class="content-showcase">
                     <h4>The AI-Powered DevSecOps Advantage</h4>
+                    <div class="click-instruction">
+                        💡 Click on any advantage below to explore detailed guides and implementation resources!
+                    </div>
                     <ul>
                         <li><strong><a href="https://www.microsoft.com/security/blog/2023/03/28/microsoft-security-copilot/">Predictive Security:</a></strong> AI predicts vulnerabilities before they're exploited</li>
                         <li><strong><a href="https://cloud.google.com/chronicle/docs/soar/soar-overview">Intelligent Automation:</a></strong> ML-driven security orchestration and response</li>
@@ -1575,6 +1633,9 @@
                 
                 <div class="content-showcase">
                     <h4 class="subsection-title">🤖 Machine Learning in Security</h4>
+                    <div class="click-instruction">
+                        💡 Click on any resource link below to access detailed guides, tutorials, and examples!
+                    </div>
                     <ul>
                         <li><strong>Anomaly Detection:</strong> ML models identify unusual patterns
                             <div style="margin-left: 20px; margin-top: 10px;">
@@ -1600,6 +1661,9 @@
                     </ul>
                     
                     <h4 class="subsection-title">🧠 Natural Language Processing</h4>
+                    <div class="click-instruction">
+                        💡 Click on any NLP resource to learn implementation details and access practical examples!
+                    </div>
                     <ul>
                         <li><strong>Security Copilots:</strong> AI assistants for security operations
                             <div style="margin-left: 20px; margin-top: 10px;">
@@ -1764,9 +1828,9 @@
             <div class="section">
                 <h3 class="section-title">AI Security Automation Tools</h3>
                 <div class="content-showcase">
-                    <p style="text-align: center; font-weight: 600; color: #FF6B6B; margin-bottom: 20px;">
-                        💡 Click on any tool category below to explore AI-powered security solutions!
-                    </p>
+                    <div class="click-instruction">
+                        💡 Click on any automation tool below to explore AI-powered security solutions and implementation guides!
+                    </div>
                     <div class="tools-grid">
                         <a href="https://www.paloaltonetworks.com/cortex/xsoar" class="tool-card">
                             <h4>AI-Powered SOAR</h4>
@@ -2253,6 +2317,33 @@
                                 <a href="https://www.checkov.io/" class="expandable-resource-link">Checkov</a>
                                 <a href="https://github.com/aquasecurity/tfsec" class="expandable-resource-link">tfsec</a>
                                 <a href="https://www.bridgecrew.io/" class="expandable-resource-link">Bridgecrew</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="expandable-item">
+                        <div class="expandable-header" onclick="toggleExpandable(this)">
+                            <strong>Infrastructure as Code Security: Scan Terraform, CloudFormation & more</strong>
+                            <span class="expandable-icon">▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <h5>🏗️ AI-Powered IaC Security Scanning</h5>
+                            <p>Comprehensive security scanning for Infrastructure as Code templates to prevent misconfigurations and security vulnerabilities before deployment.</p>
+                            <ul>
+                                <li><strong>Terraform Security:</strong> Deep analysis of .tf files for security issues</li>
+                                <li><strong>CloudFormation Scanning:</strong> AWS template security validation</li>
+                                <li><strong>Kubernetes YAML:</strong> Container orchestration security checks</li>
+                                <li><strong>Azure ARM Templates:</strong> Azure resource security analysis</li>
+                                <li><strong>Policy Enforcement:</strong> Custom security policies for IaC</li>
+                                <li><strong>Misconfiguration Prevention:</strong> AI detects dangerous configurations</li>
+                            </ul>
+                            <div class="expandable-resources">
+                                <a href="https://github.com/aquasecurity/tfsec" class="expandable-resource-link">tfsec</a>
+                                <a href="https://www.checkov.io/" class="expandable-resource-link">Checkov</a>
+                                <a href="https://github.com/Checkmarx/kics" class="expandable-resource-link">KICS</a>
+                                <a href="https://github.com/tenable/terrascan" class="expandable-resource-link">Terrascan</a>
+                                <a href="https://snyk.io/product/infrastructure-as-code-security/" class="expandable-resource-link">Snyk IaC</a>
+                                <a href="https://www.bridgecrew.io/platform/infrastructure-security/" class="expandable-resource-link">Bridgecrew IaC</a>
                             </div>
                         </div>
                     </li>
@@ -3092,7 +3183,9 @@
         <!-- Footer -->
         <div class="ebook-footer">
             <p class="copyright">© 2025 Brine Ketum. All rights reserved.</p>
-            <p>Mastering AI-Powered DevSecOps: Building Intelligent Security Automation for Modern Software Delivery</p>
+            <p style="font-size: 14px; opacity: 0.8; margin: 10px 0;">
+                This book is protected by copyright law. No part of this publication may be reproduced, distributed, or transmitted without written permission.
+            </p>
             <p style="font-size: 14px; opacity: 0.7; margin-top: 20px;">
                 First Edition • Published 2025 • AI Security Transformation Guide
             </p>
